@@ -82,7 +82,7 @@
         <script src="{{ asset('back/assets/js/waves.js') }}"></script>
         <script src="{{ asset('back/assets/js/jquery.nicescroll.js') }}"></script>
         <script src="{{ asset('back/assets/plugins/switchery/switchery.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('back/assets/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('back/assets/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
 
         <!-- App js -->
         <script src="{{ asset('back/assets/js/jquery.core.js') }}"></script>
