@@ -15,6 +15,11 @@ class CreateDatosInteresAyudantiasTable extends Migration
     {
         Schema::create('datos_interes_ayudantias', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('lugar')->nullable();
+            $table->text('habilidades');
+            $table->text('observaciones')->nullable();
+            $table->integer('estudiante')->unsigned();
+            $table->foreign('estudiante')->references('id')->on('datos_personales')->onDelete('cascade');
             $table->timestamps();
         });
     }

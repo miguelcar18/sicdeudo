@@ -8,11 +8,22 @@
         <!-- App Favicon -->
         <link rel="shortcut icon" href="{{ asset('back/assets/images/favicon.ico') }}">
         <!-- App title -->
+        @section('titulo')
         <title>Panel de control - Sicdeudo</title>
+        @show
         <!--Morris Chart CSS -->
 		<link rel="stylesheet" href="{{ asset('back/assets/plugins/morris/morris.css') }}">
         <!-- Switchery css -->
         <link href="{{ asset('back/assets/plugins/switchery/switchery.min.css') }}" rel="stylesheet" />
+        <!-- Datepicker css -->
+        <link href="{{ asset('back/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+        <!-- Sweet Alert css -->
+        <link href="{{ asset('back/assets/plugins/bootstrap-sweetalert/sweet-alert.css') }}" rel="stylesheet" type="text/css" />
+        <!-- DataTables -->
+        <link href="{{ asset('back/assets/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('back/assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+        <!-- Responsive datatable examples -->
+        <link href="{{ asset('back/assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- App CSS -->
         <link href="{{ asset('back/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
         <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,12 +40,15 @@
     </head>
     <body>
     	<!-- Navigation Bar-->
-		<header id="topnav">
+		<header id="topnav" style="background-color: #2b3d51">
         	@include('back.layouts.navbar')
         	@if(Auth::user()->rol == 1)
-        	@include('back.layouts.horizontalbar')
+            {{-- @include('back.layouts.horizontalBar') --}}
+            @include('back.layouts.horizontalBarEstudiante')
         	@elseif(Auth::user()->rol == 2)
         	@include('back.layouts.horizontalBarEstudiante')
+            @elseif(Auth::user()->rol == 3)
+            @include('back.layouts.horizontalBarSecretaria')
         	@endif
     	</header>
 		<!-- End Navigation Bar-->
@@ -61,6 +75,15 @@
 
         <!-- Modernizr js -->
         <script src="{{ asset('back/assets/js/modernizr.min.js') }}"></script>
+        <script src="{{ asset('back/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+
+        <!-- Sweet Alert js -->
+        <script src="{{ asset('back/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js') }}"></script>
+        <script src="{{ asset('back/assets/pages/jquery.sweet-alert.init.js') }}"></script>
+
+        <!-- Required datatable js -->
+        <script src="{{ asset('back/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('back/assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         {{--
         <!--Morris Chart-->
@@ -82,6 +105,7 @@
 
         <!-- Custom js -->
         <script src="{{ asset('back/assets/js/custom.js') }}"></script>
-
+        @section('javascripts')
+        @show
     </body>
 </html>

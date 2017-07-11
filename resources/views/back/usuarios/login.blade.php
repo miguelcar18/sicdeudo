@@ -83,6 +83,10 @@
         <script src="{{ asset('back/assets/js/jquery.nicescroll.js') }}"></script>
         <script src="{{ asset('back/assets/plugins/switchery/switchery.min.js') }}"></script>
         <script src="{{ asset('back/assets/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('back/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+        <!-- Sweet Alert js -->
+        <script src="{{ asset('back/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js') }}"></script>
+        <script src="{{ asset('back/assets/pages/jquery.sweet-alert.init.js') }}"></script>
 
         <!-- App js -->
         <script src="{{ asset('back/assets/js/jquery.core.js') }}"></script>

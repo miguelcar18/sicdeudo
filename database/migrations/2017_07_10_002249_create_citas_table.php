@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAyudantiaTecnicasTable extends Migration
+class CreateCitasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateAyudantiaTecnicasTable extends Migration
      */
     public function up()
     {
-        Schema::create('ayudantia_tecnicas', function (Blueprint $table) {
+        Schema::create('citas', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('fechaCita');
+            $table->integer('usuario')->unsigned();
+            $table->foreign('usuario')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateAyudantiaTecnicasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ayudantia_tecnicas');
+        Schema::dropIfExists('citas');
     }
 }

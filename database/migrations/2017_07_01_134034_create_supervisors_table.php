@@ -13,8 +13,16 @@ class CreateSupervisorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('supervisors', function (Blueprint $table) {
+        Schema::create('supervisores', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre');
+            $table->string('dependencia');
+            $table->string('extensionTelefono')->nullable();
+            $table->string('relacion');
+            $table->text('tareasAyudante')->nullable();
+            $table->integer('permanecerSitio')->nullable();
+            $table->text('detallesPermanencia')->nullable();
+            $table->text('reubicacion')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +34,6 @@ class CreateSupervisorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supervisors');
+        Schema::dropIfExists('supervisores');
     }
 }

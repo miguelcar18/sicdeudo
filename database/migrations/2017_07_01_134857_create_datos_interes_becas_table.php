@@ -15,6 +15,14 @@ class CreateDatosInteresBecasTable extends Migration
     {
         Schema::create('datos_interes_becas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('alquilaSolo')->nullable();
+            $table->text('observacionesResidencia')->nullable();
+            $table->text('observaciones')->nullable();
+            $table->integer('mismaResidencia')->nullable();
+            $table->text('detallesMismaResidencia')->nullable();
+            $table->text('direccionNuevaResidencia')->nullable();
+            $table->integer('estudiante')->unsigned();
+            $table->foreign('estudiante')->references('id')->on('datos_personales')->onDelete('cascade');
             $table->timestamps();
         });
     }

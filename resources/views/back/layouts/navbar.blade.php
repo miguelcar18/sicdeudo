@@ -1,10 +1,16 @@
-<div class="topbar-main">
+<div class="topbar-main" style="background-color: #FFFFFF;">
     <div class="container">
         <!-- LOGO -->
         <div class="topbar-left">
             <a href="{{ URL::route('dashboard') }}" class="logo">
                 <img src="{{ asset('back/assets/images/logos/logo_udo.svg') }}" width="60px" height="auto">
-                <span>SICDEUDO</span>
+            </a>
+        </div>
+        <div class="topbar-left">
+            <a href="#" class="logo">
+                <span style="color: black; line-height: 18px !important; font-size: 12px;">UNIVERSIDAD DE ORIENTE</span><br>
+                <span style="color: black; line-height: 18px !important; font-size: 12px;">DELEGACIÓN DE DESARROLLO ESTUDIANTIL</span><br>
+                <span style="color: black; line-height: 18px !important; font-size: 12px;">NÚCLEO MONAGAS</span>
             </a>
         </div>
         <!-- End Logo container-->

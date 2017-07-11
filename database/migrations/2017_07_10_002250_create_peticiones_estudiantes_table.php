@@ -15,6 +15,12 @@ class CreatePeticionesEstudiantesTable extends Migration
     {
         Schema::create('peticiones_estudiantes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('status');
+            $table->text('observaciones')->nullable();
+            $table->integer('estudiante')->unsigned();
+            $table->integer('peticion')->unsigned();
+            $table->foreign('estudiante')->references('id')->on('datos_personales')->onDelete('cascade');
+            $table->foreign('peticion')->references('id')->on('peticiones')->onDelete('cascade');
             $table->timestamps();
         });
     }

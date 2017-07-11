@@ -15,6 +15,22 @@ class CreateDatosAcademicosTable extends Migration
     {
         Schema::create('datos_academicos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('especialidad');
+            $table->string('escuela');
+            $table->string('anioIngresoUdo');
+            $table->string('anioIngresoPrograma');
+            $table->string('semestreActual');
+            $table->integer('creditosSemestreAnterior')->nullable();
+            $table->integer('creditosAprobadosCarrera')->nullable();
+            $table->double('promedioSemestreAnterior');
+            $table->integer('numeroMateriasInscritas')->nullable();
+            $table->integer('numeroCreditosInscritos')->nullable();
+            $table->integer('materiasInscritasSemestreAnterior')->nullable();
+            $table->integer('materiasCursadasSemestreAnterior')->nullable();
+            $table->integer('materiasAprobadasSemestreAnterior')->nullable();
+            $table->integer('materiasRetiradasSemestreAnterior')->nullable();
+            $table->integer('estudiante')->unsigned();
+            $table->foreign('estudiante')->references('id')->on('datos_personales')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ class UsuariosSeeder extends Seeder
             'name'          => 'Miguel Carmona',
             'username'      => 'miguelcar18',
             'email'         => 'miguelcar18@gmail.com',
+            'cedula'        => '19257684',
             'password'      => bcrypt('1234'),
             'rol'           => 1,
             'path'          => '25miguel.jpeg',
