@@ -15,4 +15,13 @@ class BackController extends Controller
     {
     	return view ('back.layouts.base');
     }
+
+    public function formularioReportes()
+    {
+    	return view ('back.jefe.reportes');
+    }
+    public function formularioReporteEstadistico()
+    {
+        return view ('back.jefe.reportes');
+    }
 }

@@ -23,6 +23,6 @@ class DatosAcademicos extends Model
 
     public function nombreEstudiante()
     {
-        return $this->hasOne('App\DatosPersonales', 'id', 'estudiante');
+        return $this->hasOne('App\DatosPersonales', 'estudiante', 'id');
     }
 }

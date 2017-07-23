@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="{{ asset('back/assets/images/favicon.ico') }}">
         <!-- App title -->
         @section('titulo')
-        <title>Panel de control - Sicdeudo</title>
+        <title>Sicdeudo</title>
         @show
         <!--Morris Chart CSS -->
 		<link rel="stylesheet" href="{{ asset('back/assets/plugins/morris/morris.css') }}">
@@ -43,33 +43,22 @@
     <body>
     	<!-- Navigation Bar-->
 		<header id="topnav" style="background-color: #2b3d51">
-        	@include('back.layouts.navbar')
-            @if(Auth::user()->rol == 1)
-            {{-- @include('back.layouts.horizontalBar') --}}
-            @include('back.layouts.horizontalBarEstudiante')
-            @elseif(Auth::user()->rol == 2)
-            @include('back.layouts.horizontalBarEstudiante')
-            @elseif(Auth::user()->rol == 3)
-            @include('back.layouts.horizontalBarSecretaria')
-            @elseif(Auth::user()->rol == 4)
-            @include('back.layouts.horizontalBarTrabajador')
-            @elseif(Auth::user()->rol == 5)
-            @include('back.layouts.horizontalBarJefe')
-            @endif
+        	@include('front.layouts.navbar')
+            @include('front.layouts.horizontalBar')
     	</header>
 		<!-- End Navigation Bar-->
         <div class="wrapper">
             <div class="container">
                 @section('content')
                     {{--
-                    @include('back.layouts.content-title', ['titulo' => 'Panel de control'])
-                    @include('back.layouts.content-base')
+                    @include('front.layouts.content-title', ['titulo' => 'Panel de control'])
+                    @include('front.layouts.content-base')
                     --}}
                 @show
             </div> <!-- container -->
-            @include('back.layouts.right-sidebar')
+            @include('front.layouts.right-sidebar')
         </div> <!-- End wrapper -->
-        @include('back.layouts.footer')
+        @include('front.layouts.footer')
 
         <!-- jQuery  -->
         <script src="{{ asset('back/assets/js/jquery.min.js') }}"></script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\back;
 use App\DatosPersonales;
 use App\DatosAcademicos;
 use App\DatosInteresBecas;
+use App\PeticionesEstudiantes;
 use App\Supervisor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -64,8 +65,15 @@ class BecaController extends Controller
                 'observacionesResidencia'  => $request['observacionesResidencia'], 
                 'observaciones'            => $request['observaciones']
             ];
+            $camposPeticiones = [
+                'status'        => 'Pendiente', 
+                'observaciones' => '', 
+                'estudiante'    => $idEstudiante, 
+                'peticion'      => 5
+            ];
             DatosAcademicos::create($camposAcademicos);
             DatosInteresBecas::create($camposInteres);
+            PeticionesEstudiantes::create($camposPeticiones);
             return response()->json([
                 'nuevoContenido' => $request->all()
             ]);
@@ -113,11 +121,38 @@ class BecaController extends Controller
                 'detallesMismaResidencia'   => $request['detallesMismaResidencia'], 
                 'direccionNuevaResidencia'  => $request['direccionNuevaResidencia']
             ];
+            $camposPeticiones = [
+                'status'        => 'Pendiente', 
+                'observaciones' => '', 
+                'estudiante'    => $idEstudiante, 
+                'peticion'      => 6
+            ];
             DatosAcademicos::create($camposAcademicos);
             Supervisor::create($camposInteres);
+            PeticionesEstudiantes::create($camposPeticiones);
             return response()->json([
                 'nuevoContenido' => $request->all()
             ]);
         }
+    }
+
+    public function listadoSolicitudesBecas() {
+        $solicitudes = PeticionesEstudiantes::where('peticion', 5)->get();
+        return view("back.secretaria.solicitudesBecas", compact('solicitudes'));
+    }
+
+    public function listadoRenovacionesBecas() {
+        $solicitudes = PeticionesEstudiantes::where('peticion', 6)->get();
+        return view("back.secretaria.renovacionesBecas", compact('solicitudes'));
+    }
+
+    public function formularioRequisitosBeca($id) {
+        $estudiante = DatosPersonales::find($id);
+        return view("back.secretaria.registrarRequisitosBecas", compact('estudiante'));
+    }
+
+    public function formularioRequisitosRenovacionBeca($id) {
+        $estudiante = DatosPersonales::find($id);
+        return view("back.secretaria.registrarRequisitosRenovacionBecas", compact('estudiante'));
     }
 }

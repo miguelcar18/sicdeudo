@@ -18,6 +18,8 @@
 						<th>Especialidad</th>
 						<th>Promedio</th>
 						<th>Status</th>
+						<th>Observaciones</th>
+						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -72,7 +74,15 @@
 							@endif
 						</td>
 						<td>{{ number_format($solicitud->nombreEstudiante->datosAcademicos->promedioSemestreAnterior, 2, ',', '.') }}</td>
-						<td>{{ $solicitud->status }}</td>
+						<td>
+							{!! Form::select('escuela', array('' => 'Seleccione', 'aprobado' => 'Aprobado', 'rechazado' => 'Rechazado'), null, $attributes = array('id' => 'escuela', 'class' => 'form-control')) !!}
+						</td>
+						<td>
+							{!! Form::text('apellidosNombres', null, ['placeholder' => '', 'class' => 'form-control', 'id' => 'apellidosNombres']) !!}
+						</td>
+						<td>
+							<a class="btn btn-primary waves-effect waves-light" href="{{ URL::route('AprobarAO', $solicitud->nombreEstudiante->id) }}"> <span>Ver más</span> </a>
+						</td>
 					</tr>
 					@endforeach
 				</tbody>

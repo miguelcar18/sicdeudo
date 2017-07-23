@@ -72,6 +72,7 @@
 
         //form with validation
         this.createValidatorForm($("#wizard-validation-form"));
+        this.createValidatorForm($("#requisitosSolicitudAOESForm"));
 
         //vertical form
         this.createVertical($("#wizard-vertical"));

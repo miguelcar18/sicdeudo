@@ -30,4 +30,14 @@ class DatosPersonales extends Model
     {
         return $this->hasOne('App\User', 'id', 'usuario');
     }
+
+    public function datosAcademicos()
+    {
+        return $this->hasOne('App\DatosAcademicos', 'estudiante');
+    }
+
+    public function datosInteresAyudantia()
+    {
+        return $this->hasOne('App\DatosInteresAyudantias', 'estudiante');
+    }
 }

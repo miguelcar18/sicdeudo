@@ -29,11 +29,13 @@
         	<div class="account-bg">
                 <div class="card-box m-b-0">
                     <div class="text-xs-center m-t-20">
-                        <img src="{{ asset('back/assets/images/logos/logo_udo.svg') }}" width="150px" height="auto"><br>
+                        <img src="{{ asset('back/assets/images/logos/logo_sistema.png') }}" width="auto" height="120px"><br>
+                        {{--
                         <a href="#" class="logo">
                             <span>SICDEUDO</span>
                             <h6 class="text-muted text-uppercase m-b-0 m-t-0">Sistema de información computarizado de desarrollo estudiantil UDO Monagas</h6>
                         </a>
+                        --}}
                     </div>
                     <div class="m-t-30 m-b-20">
                         <div class="col-xs-12" id="respuesta"></div>

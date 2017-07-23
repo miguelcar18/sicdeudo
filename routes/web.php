@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'front', 'uses' => 'front\FrontController@index']);
 
 Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::get('/', ['as' => 'dashboard', 'uses' => 'back\BackController@index']);
@@ -32,6 +30,38 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::get('/cita-cambio-especialidad', ['as' => 'citaCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@formularioCita']);
 	Route::post('/cita-cambio-especialidad', ['as' => 'registrarCita', 'uses' => 'back\CambioEspecialidadController@registrarCita']);
 	Route::get('/solicitudes-ayudantias-ordinarias', ['as' => 'solicitudesAyudantiasOrdinarias', 'uses' => 'back\AyudantiaController@listadoSolicitudesOrdinarias']);
+
+	Route::get('/registrar-requisitos-ayudantias-ordinarias/{id}', ['as' => 'formularioRequisitosAO', 'uses' => 'back\AyudantiaController@formularioRequisitosAO']);
+	Route::post('/registrar-requisitos-ayudantias-ordinarias', ['as' => 'registrarRequisitosAO', 'uses' => 'back\AyudantiaController@registrarRequisitosAO']);
+	Route::get('/registrar-renovacion-ayudantias-ordinarias/{id}', ['as' => 'formularioRequisitosRenovacionAO', 'uses' => 'back\AyudantiaController@formularioRequisitosRenovacionAO']);
+	Route::post('/registrar-renovacion-ayudantias-ordinarias', ['as' => 'registrarRequisitosRenovacionAO', 'uses' => 'back\AyudantiaController@registrarRequisitosRenovacionAO']);
+
+	Route::get('/registrar-requisitos-ayudantias-tecnicas/{id}', ['as' => 'formularioRequisitosAT', 'uses' => 'back\AyudantiaController@formularioRequisitosAT']);
+	Route::post('/registrar-requisitos-ayudantias-tecnicas', ['as' => 'registrarRequisitosAT', 'uses' => 'back\AyudantiaController@registrarRequisitosAT']);
+	Route::get('/registrar-renovacion-ayudantias-tecnicas/{id}', ['as' => 'formularioRequisitosRenovacionAT', 'uses' => 'back\AyudantiaController@formularioRequisitosRenovacionAT']);
+	Route::post('/registrar-renovacion-ayudantias-tecnicas', ['as' => 'registrarRequisitosRenovacionAT', 'uses' => 'back\AyudantiaController@registrarRequisitosRenovacionAT']);
+
+	Route::get('/registrar-requisitos-becas/{id}', ['as' => 'formularioRequisitosBeca', 'uses' => 'back\BecaController@formularioRequisitosBeca']);
+	Route::post('/registrar-requisitos-becas', ['as' => 'registrarRequisitosBecas', 'uses' => 'back\BecaController@registrarRequisitosBeca']);
+	Route::get('/registrar-renovacion-becas/{id}', ['as' => 'formularioRequisitosRenovacionBeca', 'uses' => 'back\BecaController@formularioRequisitosRenovacionBeca']);
+	Route::post('/registrar-renovacion-becas', ['as' => 'registrarRequisitosRenovacionBecas', 'uses' => 'back\BecaController@registrarRequisitosRenovacionBeca']);
+
+	Route::get('/registrar-requisitos-cambio-especialidad/{id}', ['as' => 'formularioRequisitosCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@formularioRequisitosCambioEspecialidad']);
+	Route::post('/registrar-requisitos-cambio-especialidad', ['as' => 'registrarRequisitosCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@registrarRequisitosCambioEspecialidad']);
+	Route::get('/registrar-renovacion-cambio-especialidad/{id}', ['as' => 'formularioRequisitosRenovacionCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@formularioRequisitosRenovacionCambioEspecialidad']);
+	Route::post('/registrar-renovacion-cambio-especialidad', ['as' => 'registrarRequisitosRenovacionCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@registrarRequisitosRenovacionCambioEspecialidad']);
+
+	Route::get('/solicitudes-ayudantias-ordinarias-es', ['as' => 'solicitudesAyudantiasOrdinariasEs', 'uses' => 'back\AyudantiaController@listadoSolicitudesOrdinariasEs']);
+	Route::get('/ayudantia-ordinaria-estudiose/{id}', ['as' => 'estudioSEAO', 'uses' => 'back\AyudantiaController@formularioEstudioSEAO']);
+
+	Route::get('/solicitudes-ayudantias-ordinarias-aprobar', ['as' => 'solicitudesAyudantiasOrdinariasAprobar', 'uses' => 'back\AyudantiaController@listadoSolicitudesOrdinariasAprobar']);
+	Route::get('/ayudantia-ordinaria-aprobar/{id}', ['as' => 'AprobarAO', 'uses' => 'back\AyudantiaController@formularioAprobarAO']);
+
+	Route::get('/solicitudes-cambio-especialidad-aprobar', ['as' => 'solicitudesCambioEspecialidadAprobar', 'uses' => 'back\CambioEspecialidadController@listadoSolicitudesCambioEspecialidadAprobar']);
+	Route::get('/cambio-especialidad-aprobar/{id}', ['as' => 'AprobarCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@formularioAprobarCambioEspecialidad']);
+
+	Route::get('/reportes', ['as' => 'formularioReportes', 'uses' => 'back\BackController@formularioReportes']);
+	Route::get('/reporte-estadistico', ['as' => 'formularioReporteEstadistico', 'uses' => 'back\BackController@formularioReporteEstadistico']);
 });
 
 Route::resource('login', 'back\LoginController');

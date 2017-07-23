@@ -18,6 +18,7 @@
 						<th>Especialidad</th>
 						<th>Promedio</th>
 						<th>Status</th>
+						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -73,6 +74,9 @@
 						</td>
 						<td>{{ number_format($solicitud->nombreEstudiante->datosAcademicos->promedioSemestreAnterior, 2, ',', '.') }}</td>
 						<td>{{ $solicitud->status }}</td>
+						<td>
+							<a class="btn btn-primary waves-effect waves-light" href="{{ URL::route('estudioSEAO', $solicitud->nombreEstudiante->id) }}"> <span>Estudio Socio-Económico</span> </a>
+						</td>
 					</tr>
 					@endforeach
 				</tbody>

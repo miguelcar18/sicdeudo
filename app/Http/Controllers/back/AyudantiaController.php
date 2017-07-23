@@ -5,6 +5,7 @@ namespace App\Http\Controllers\back;
 use App\DatosPersonales;
 use App\DatosAcademicos;
 use App\DatosInteresAyudantias;
+use App\PeticionesEstudiantes;
 use App\Supervisor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -64,8 +65,15 @@ class AyudantiaController extends Controller
                 'habilidades'   => $request['habilidades'], 
                 'observaciones' => $request['observaciones']
             ];
+            $camposPeticiones = [
+                'status'        => 'Pendiente', 
+                'observaciones' => '', 
+                'estudiante'    => $idEstudiante, 
+                'peticion'      => 1
+            ];
             DatosAcademicos::create($camposAcademicos);
             DatosInteresAyudantias::create($camposInteres);
+            PeticionesEstudiantes::create($camposPeticiones);
             return response()->json([
                 'nuevoContenido' => $request->all()
             ]);
@@ -118,8 +126,15 @@ class AyudantiaController extends Controller
                 'detallesPermanencia'   => $request['detallesPermanencia'], 
                 'reubicacion'           => $request['reubicacion']
             ];
+            $camposPeticiones = [
+                'status'        => 'Pendiente', 
+                'observaciones' => '', 
+                'estudiante'    => $idEstudiante, 
+                'peticion'      => 2
+            ];
             DatosAcademicos::create($camposAcademicos);
             Supervisor::create($camposSupervisor);
+            PeticionesEstudiantes::create($camposPeticiones);
             $idSupervisor = \DB::getPdo()->lastInsertId();
             $this->estudiante = DatosPersonales::find($idEstudiante);
             $this->estudiante->supervisor = $idSupervisor;
@@ -173,8 +188,15 @@ class AyudantiaController extends Controller
                 'habilidades'   => $request['habilidades'], 
                 'observaciones' => $request['observaciones']
             ];
+            $camposPeticiones = [
+                'status'        => 'Pendiente', 
+                'observaciones' => '', 
+                'estudiante'    => $idEstudiante, 
+                'peticion'      => 3
+            ];
             DatosAcademicos::create($camposAcademicos);
             DatosInteresAyudantias::create($camposInteres);
+            PeticionesEstudiantes::create($camposPeticiones);
             return response()->json([
                 'nuevoContenido' => $request->all()
             ]);
@@ -227,8 +249,15 @@ class AyudantiaController extends Controller
                 'detallesPermanencia'   => $request['detallesPermanencia'], 
                 'reubicacion'           => $request['reubicacion']
             ];
+            $camposPeticiones = [
+                'status'        => 'Pendiente', 
+                'observaciones' => '', 
+                'estudiante'    => $idEstudiante, 
+                'peticion'      => 4
+            ];
             DatosAcademicos::create($camposAcademicos);
             Supervisor::create($camposSupervisor);
+            PeticionesEstudiantes::create($camposPeticiones);
             $idSupervisor = \DB::getPdo()->lastInsertId();
             $this->estudiante = DatosPersonales::find($idEstudiante);
             $this->estudiante->supervisor = $idSupervisor;
@@ -240,6 +269,62 @@ class AyudantiaController extends Controller
     }
 
     public function listadoSolicitudesOrdinarias() {
-        return view("back.secretaria.solicitudesAyudantiasOrdinarias");
+        $solicitudes = PeticionesEstudiantes::where('peticion', 1)->get();
+        return view("back.secretaria.solicitudesAyudantiasOrdinarias", compact('solicitudes'));
+    }
+
+    public function listadoRenovacionesOrdinarias() {
+        $solicitudes = PeticionesEstudiantes::where('peticion', 2)->get();
+        return view("back.secretaria.renovacionesAyudantiasOrdinarias", compact('solicitudes'));
+    }
+
+    public function listadoSolicitudesTecnicas() {
+        $solicitudes = PeticionesEstudiantes::where('peticion', 3)->get();
+        return view("back.secretaria.solicitudesAyudantiasTecnicas", compact('solicitudes'));
+    }
+
+    public function listadoRenovacionesTecnicas() {
+        $solicitudes = PeticionesEstudiantes::where('peticion', 4)->get();
+        return view("back.secretaria.renovacionesAyudantiasTecnicas", compact('solicitudes'));
+    }
+
+    public function formularioRequisitosAO($id) {
+        $estudiante = DatosPersonales::find($id);
+        return view("back.secretaria.registrarRequisitosAyudantiasOrdinarias", compact('estudiante'));
+    }
+
+    public function formularioRequisitosRenovacionAO($id) {
+        $estudiante = DatosPersonales::find($id);
+        return view("back.secretaria.registrarRequisitosRenovacionAyudantiasOrdinarias", compact('estudiante'));
+    }
+
+    public function formularioRequisitosAT($id) {
+        $estudiante = DatosPersonales::find($id);
+        return view("back.secretaria.registrarRequisitosAyudantiasTecnicas", compact('estudiante'));
+    }
+
+    public function formularioRequisitosRenovacionAT($id) {
+        $estudiante = DatosPersonales::find($id);
+        return view("back.secretaria.registrarRequisitosRenovacionAyudantiasTecnicas", compact('estudiante'));
+    }
+
+    public function listadoSolicitudesOrdinariasEs() {
+        $solicitudes = PeticionesEstudiantes::where('peticion', 1)->get();
+        return view("back.trabajador.solicitudesAyudantiasOrdinarias", compact('solicitudes'));
+    }
+
+    public function formularioEstudioSEAO($id) {
+        $estudiante = DatosPersonales::find($id);
+        return view("back.trabajador.registrarAyudantiasOrdinarias", compact('estudiante'));
+    }
+
+    public function listadoSolicitudesOrdinariasAprobar() {
+        $solicitudes = PeticionesEstudiantes::where('peticion', 1)->get();
+        return view("back.jefe.solicitudesAyudantiasOrdinarias", compact('solicitudes'));
+    }
+
+    public function formularioAprobarAO($id) {
+        $estudiante = DatosPersonales::find($id);
+        return view("back.jefe.registrarAyudantiasOrdinarias", compact('estudiante'));
     }
 }
