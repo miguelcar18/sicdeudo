@@ -1,5 +1,5 @@
 <!-- Page-Title -->
-<div class="row" style="background-color: #ffffff">
+<div class="row" style="background-color: #EEEEEE">
     <div class="col-sm-12">
         {{--
         <div class="btn-group pull-right m-t-15">

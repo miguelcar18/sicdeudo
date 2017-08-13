@@ -14,12 +14,9 @@
 					<tr>
 						<th>Cédula</th>
 						<th>Nombre</th>
-						<th>Semestre</th>
 						<th>Especialidad</th>
-						<th>Promedio</th>
 						<th>Status</th>
 						<th>Observaciones</th>
-						<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,29 +28,6 @@
 							</a>
 						</td>
 						<td>{{ $solicitud->nombreEstudiante->apellidosNombres }}</td>
-						<td>
-							@if($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'primero')
-							1er
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'segundo')
-							2do
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'tercero')
-							3ro
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'cuarto')
-							4to
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'quinto')
-							5to
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'sexto')
-							6to
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'septimo')
-							7mo
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'octavo')
-							8vo
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'noveno')
-							9no
-							@elseif($solicitud->nombreEstudiante->datosAcademicos->semestreActual == 'decimo')
-							10mo
-							@endif
-						</td>
 						<td>
 							@if($solicitud->nombreEstudiante->datosAcademicos->especialidad == 'administracion' )
 							Administración de Empresas
@@ -73,15 +47,11 @@
 							Tecnología de los Alimentos
 							@endif
 						</td>
-						<td>{{ number_format($solicitud->nombreEstudiante->datosAcademicos->promedioSemestreAnterior, 2, ',', '.') }}</td>
 						<td>
 							{!! Form::select('escuela', array('' => 'Seleccione', 'aprobado' => 'Aprobado', 'rechazado' => 'Rechazado'), null, $attributes = array('id' => 'escuela', 'class' => 'form-control')) !!}
 						</td>
 						<td>
 							{!! Form::text('apellidosNombres', null, ['placeholder' => '', 'class' => 'form-control', 'id' => 'apellidosNombres']) !!}
-						</td>
-						<td>
-							<a class="btn btn-primary waves-effect waves-light" href="{{ URL::route('AprobarAO', $solicitud->nombreEstudiante->id) }}"> <span>Ver más</span> </a>
 						</td>
 					</tr>
 					@endforeach

@@ -21358,6 +21358,12 @@ h3.timeline-title {
 .bg-purple {
   background-color: #9261c6; }
 
+.bg-lightblue {
+  background-color: lightblue; }
+
+.bg-darkblue {
+  background-color: darkblue; }
+
 /* Margin / Padding classes */
 .p-0 {
   padding: 0 !important; }

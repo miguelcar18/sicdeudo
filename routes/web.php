@@ -12,6 +12,13 @@
 */
 
 Route::get('/', ['as' => 'front', 'uses' => 'front\FrontController@index']);
+Route::get('/area-desarrollo-social', ['as' => 'desarrolloSocial', 'uses' => 'front\FrontController@desarrolloSocial']);
+Route::get('/area-salud', ['as' => 'salud', 'uses' => 'front\FrontController@salud']);
+Route::get('/area-orientacion', ['as' => 'orientacion', 'uses' => 'front\FrontController@orientacion']);
+Route::get('/area-orientacion-cambio-especialidad', ['as' => 'orientacionCambioEspecialidad', 'uses' => 'front\FrontController@orientacionCambioEspecialidad']);
+Route::get('/area-socio-educativa', ['as' => 'socioEducativa', 'uses' => 'front\FrontController@socioEducativa']);
+Route::get('/desarrollo-estudiantil', ['as' => 'desarrolloEstudiantil', 'uses' => 'front\FrontController@desarrolloEstudiantil']);
+Route::get('/contactos', ['as' => 'contactos', 'uses' => 'front\FrontController@contactos']);
 
 Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::get('/', ['as' => 'dashboard', 'uses' => 'back\BackController@index']);
@@ -62,6 +69,8 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 
 	Route::get('/reportes', ['as' => 'formularioReportes', 'uses' => 'back\BackController@formularioReportes']);
 	Route::get('/reporte-estadistico', ['as' => 'formularioReporteEstadistico', 'uses' => 'back\BackController@formularioReporteEstadistico']);
+
+	Route::resource('usuarios', 'back\UserController');
 });
 
 Route::resource('login', 'back\LoginController');

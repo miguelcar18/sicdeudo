@@ -7,16 +7,16 @@
                     <a href="{{ URL::route('front') }}"><i class="zmdi zmdi-view-dashboard"></i> <span> Inicio </span> </a>
                 </li>
                 <li>
-                    <a href="#"><i class="zmdi zmdi-balance"></i><span> Desarrollo estudiantil </span> </a>
+                    <a href="{{ URL::route('desarrolloEstudiantil') }}"><i class="zmdi zmdi-balance"></i><span> Desarrollo estudiantil </span> </a>
                 </li>
                 <li>
-                    <a href="#"><i class="zmdi zmdi-account-box-mail"></i><span> Contactos </span> </a>
+                    <a href="{{ URL::route('contactos') }}"><i class="zmdi zmdi-account-box-mail"></i><span> Contactos </span> </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('login.index') }}"><i class="zmdi zmdi-search"></i><span> Iniciar sesión </span> </a>
+                    <a href="{{ URL::route('login.index') }}"><i class="zmdi zmdi-key"></i><span> Iniciar sesión </span> </a>
                 </li>
                 <li style="float: right">
-                    <a href="#" style="padding-top: 17px; padding-bottom: 17px">
+                    <a href="https://www.facebook.com/ADS.UDO.MONAGAS/?hc_ref=ARTdJwV8qqEGBxPgQ2cll0SkCu8oujvoD5gDDJmOJeZeq6Fw3VszWNjKwL42156JDsg&fref=nf" target="_blank" style="padding-top: 17px; padding-bottom: 17px">
                         <i class="zmdi zmdi-facebook-box" style="font-size: 28px;"></i>
                     </a>
                 </li>

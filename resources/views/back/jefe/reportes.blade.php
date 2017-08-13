@@ -29,7 +29,6 @@
 		</div>
 	</div>
 </div>
-{{--
 <div class="row">
 	<div class="col-xs-12 col-lg-12 col-xl-8">
 		<div class="card-box">
@@ -87,7 +86,6 @@
 		</div>
 	</div><!-- end col-->
 </div>
---}}
 @stop
 
 @section('styles')

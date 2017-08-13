@@ -9,7 +9,7 @@
                 <li class="has-submenu">
                     <a href="#"><i class="zmdi zmdi-account-box-mail"></i> <span> Solicitudes recibidas </span> </a>
                     <ul class="submenu">
-                        <li><a href="{{ URL::route('solicitudesAyudantiasOrdinariasAprobar') }}">Ayudantías ordinarias</a></li>
+                        <li><a href="{{ URL::route('solicitudesAyudantiasOrdinarias') }}">Ayudantías ordinarias</a></li>
                         <li><a href="#">Ayudantías técnicas</a></li>
                         <li><a href="#">Becas de residencia</a></li>
                     </ul>
@@ -23,10 +23,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ URL::route('formularioReportes') }}"><i class="zmdi zmdi-collection-text"></i><span> Reportes </span> </a>
-                </li>
-                <li>
-                    <a href="{{ URL::route('usuarios.index') }}"><i class="zmdi zmdi-accounts"></i> <span> Administrar usuarios </span> </a>
+                    <a href="#"><i class="zmdi zmdi-search"></i><span> Consultas </span> </a>
                 </li>
             </ul>
             <!-- End navigation menu  -->
