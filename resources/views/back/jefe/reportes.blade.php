@@ -90,12 +90,12 @@
 
 @section('styles')
 <!--Morris Chart CSS -->
-<link rel="stylesheet" href="{{ asset('back/assets/plugins/morris/morris.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/morris/morris.css') }}">
 @stop
 
 @section('javascripts')
-<script src="{{ asset('back/assets/plugins/morris/morris.min.js') }}"></script>
-<script src="{{ asset('back/assets/plugins/raphael/raphael-min.js') }}"></script>
+<script src="{{ asset('assets/plugins/morris/morris.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/raphael/raphael-min.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#datatable').DataTable({

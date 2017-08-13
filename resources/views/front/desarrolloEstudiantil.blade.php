@@ -9,7 +9,7 @@
 	@include('front.layouts.content-title', ['titulo' => 'Delegación de desarrollo estudiantil'])
 	<div class="row">
 		<div class="col-xs-12">
-			<center><img src="{{ ('back/assets/images/front/desarrollo-estudiantil.jpg') }}" class="img-responsive" width="60%" height="auto"></center>
+			<center><img src="{{ ('assets/images/front/desarrollo-estudiantil.jpg') }}" class="img-responsive" width="60%" height="auto"></center>
 		</div><!-- end col-->
 	</div>
 	<div class="row">

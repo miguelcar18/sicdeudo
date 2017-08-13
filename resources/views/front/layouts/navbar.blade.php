@@ -3,7 +3,7 @@
         <!-- LOGO -->
         <div class="topbar-left">
             <a href="{{ URL::route('dashboard') }}" class="logo">
-                <img src="{{ asset('back/assets/images/logos/logo_udo.svg') }}" width="60px" height="auto">
+                <img src="{{ asset('assets/images/logos/logo_udo.svg') }}" width="60px" height="auto">
             </a>
         </div>
         <div class="topbar-left">
@@ -72,7 +72,7 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon bg-faded">
-                                <img src={{ asset('back/assets/images/users/avatar-2.jpg') }}" alt="img" class="img-circle img-fluid">
+                                <img src={{ asset('assets/images/users/avatar-2.jpg') }}" alt="img" class="img-circle img-fluid">
                             </div>
                             <p class="notify-details">
                                 <b>Robert Taylor</b>
@@ -83,7 +83,7 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon bg-faded">
-                                <img src={{ asset('back/assets/images/users/avatar-3.jpg') }}" alt="img" class="img-circle img-fluid">
+                                <img src={{ asset('assets/images/users/avatar-3.jpg') }}" alt="img" class="img-circle img-fluid">
                             </div>
                             <p class="notify-details">
                                 <b>Carlos Crouch</b>
@@ -94,7 +94,7 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon bg-faded">
-                                <img src={{ asset('back/assets/images/users/avatar-4.jpg') }}" alt="img" class="img-circle img-fluid">
+                                <img src={{ asset('assets/images/users/avatar-4.jpg') }}" alt="img" class="img-circle img-fluid">
                             </div>
                             <p class="notify-details">
                                 <b>Robert Taylor</b>
@@ -117,7 +117,7 @@
                 <li class="nav-item dropdown notification-list">
                     <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         @if(Auth::user()->path == '')
-                        <img src="{{ asset('back/assets/avatars/user.jpg') }}" alt="user" class="img-circle">
+                        <img src="{{ asset('assets/avatars/user.jpg') }}" alt="user" class="img-circle">
                         @else
                         <img src="{{ asset('uploads/usuarios/'.Auth::user()->path) }}" alt="Foto de {{ Auth::user()->username }}" class="img-circle">
                         @endif
@@ -139,7 +139,7 @@
                 </li>
                 <li class="nav-item dropdown notification-list">
                     <a class="nav-link waves-effect waves-light right-bar-toggle" href="javascript:void(0);">
-                        <img src="{{ asset('back/assets/images/logos/logo_sistema.png') }}" width="auto" height="60px">
+                        <img src="{{ asset('assets/images/logos/logo_sistema.png') }}" width="auto" height="60px">
                     </a>
                 </li>
                 --}}

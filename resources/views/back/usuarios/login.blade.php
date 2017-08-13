@@ -6,20 +6,20 @@
         <meta name="description" content="Sicdeudo">
         <meta name="author" content="Daihana Ribero">
         <!-- App Favicon -->
-        <link rel="shortcut icon" href="{{ asset('back/assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
         <!-- App title -->
         <title>Inicio de sesión - Sicdeudo</title>
         <!-- App CSS -->
-        <link href="{{ asset('back/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
         <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-        <link href="{{ asset('back/assets/css/custom.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" type="text/css" />
         <style type="text/css">
-            .account-pages{ background-image: url("{{ asset('back/assets/images/background/fondo01.png') }}"); }
+            .account-pages{ background-image: url("{{ asset('assets/images/background/fondo01.png') }}"); }
         </style>
     </head>
     <body>
@@ -29,7 +29,7 @@
         	<div class="account-bg">
                 <div class="card-box m-b-0">
                     <div class="text-xs-center m-t-20">
-                        <img src="{{ asset('back/assets/images/logos/logo_sistema.png') }}" width="auto" height="120px"><br>
+                        <img src="{{ asset('assets/images/logos/logo_sistema.png') }}" width="auto" height="120px"><br>
                         {{--
                         <a href="#" class="logo">
                             <span>SICDEUDO</span>
@@ -77,23 +77,23 @@
         <!-- end wrapper page -->
 
         <!-- jQuery  -->
-        <script src="{{ asset('back/assets/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('back/assets/js/modernizr.min.js') }}"></script>
-        <script src="{{ asset('back/assets/js/tether.min.js') }}"></script><!-- Tether for Bootstrap -->
-        <script src="{{ asset('back/assets/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('back/assets/js/waves.js') }}"></script>
-        <script src="{{ asset('back/assets/js/jquery.nicescroll.js') }}"></script>
-        <script src="{{ asset('back/assets/plugins/switchery/switchery.min.js') }}"></script>
-        <script src="{{ asset('back/assets/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-        <script src="{{ asset('back/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/modernizr.min.js') }}"></script>
+        <script src="{{ asset('assets/js/tether.min.js') }}"></script><!-- Tether for Bootstrap -->
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/js/waves.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
+        <script src="{{ asset('assets/plugins/switchery/switchery.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
         <!-- Sweet Alert js -->
-        <script src="{{ asset('back/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js') }}"></script>
-        <script src="{{ asset('back/assets/pages/jquery.sweet-alert.init.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap-sweetalert/sweet-alert.min.js') }}"></script>
+        <script src="{{ asset('assets/pages/jquery.sweet-alert.init.js') }}"></script>
 
         <!-- App js -->
-        <script src="{{ asset('back/assets/js/jquery.core.js') }}"></script>
-        <script src="{{ asset('back/assets/js/jquery.app.js') }}"></script>
-        <script src="{{ asset('back/assets/js/custom.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.core.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.app.js') }}"></script>
+        <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     </body>
 </html>

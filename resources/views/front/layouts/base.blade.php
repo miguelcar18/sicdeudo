@@ -6,30 +6,30 @@
         <meta name="description" content="Sistema de información computarizado de desarrollo estudiantil UDO Monagas">
         <meta name="author" content="Daihana Ribero">
         <!-- App Favicon -->
-        <link rel="shortcut icon" href="{{ asset('back/assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
         <!-- App title -->
         @section('titulo')
         <title>Sicdeudo</title>
         @show
         <!--Morris Chart CSS -->
-		<link rel="stylesheet" href="{{ asset('back/assets/plugins/morris/morris.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/plugins/morris/morris.css') }}">
         <!-- Switchery css -->
-        <link href="{{ asset('back/assets/plugins/switchery/switchery.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/switchery/switchery.min.css') }}" rel="stylesheet" />
         <!-- Datepicker css -->
-        <link href="{{ asset('back/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
         <!-- Sweet Alert css -->
-        <link href="{{ asset('back/assets/plugins/bootstrap-sweetalert/sweet-alert.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/bootstrap-sweetalert/sweet-alert.css') }}" rel="stylesheet" type="text/css" />
         <!-- DataTables -->
-        <link href="{{ asset('back/assets/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
         <!--calendar css-->
-        <link href="{{ asset('back/assets/plugins/fullcalendar/dist/fullcalendar.css') }}" rel="stylesheet" />
-        <link href="{{ asset('back/assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/fullcalendar/dist/fullcalendar.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- Responsive datatable examples -->
-        <link href="{{ asset('back/assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
         <!--Form Wizard-->
-        <link rel="stylesheet" type="text/css" href="{{ asset('back/assets/plugins/jquery.steps/demo/css/jquery.steps.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/jquery.steps/demo/css/jquery.steps.css') }}" />
         <!-- App CSS -->
-        <link href="{{ asset('back/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
         <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -57,7 +57,7 @@
                 </ol>
                 <div role="listbox" class="carousel-inner" style="height: 470px">
                     <div class="carousel-item active">
-                        <img src="{{ ('back/assets/images/background/fondo01.png') }}" alt="First slide image">
+                        <img src="{{ ('assets/images/background/fondo01.png') }}" alt="First slide image">
                         <div class="carousel-caption" style="bottom: 55%">
                             <h1 class="text-dark font-600 text-uppercase" style="font-weight: 900">Cambio de especialidad</h1><br>
                             <h3 class="text-dark font-600 text-center">¿Estas considerando cambiar de carrera? </h3>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ ('back/assets/images/background/fondo01.png') }}" alt="Second slide image">
+                        <img src="{{ ('assets/images/background/fondo01.png') }}" alt="Second slide image">
                         <div class="carousel-caption" style="bottom: 55%">
                             <h1 class="text-dark font-600 text-uppercase" style="font-weight: 900">Asistencia socio-económica</h1><br>
                             <h3 class="text-dark font-600 text-center">Te ofrecemos diferentes modalidades para obtener asistencia socio económica. Puedes solicitar una beca, ayudantía o ayudantía eventual para casos especiales.</h3><br>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ ('back/assets/images/background/fondo01.png') }}" alt="Third slide image">
+                        <img src="{{ ('assets/images/background/fondo01.png') }}" alt="Third slide image">
                         <div class="carousel-caption" style="bottom: 55%">
                             <h1 class="text-dark font-600 text-uppercase" style="font-weight: 900">Servicio médico</h1><br>
                             <h3 class="text-dark font-600 text-center">Dispones de una unidad destinada al servicio médico de tipo preventivo y curativo, asi como atención de urgencias no complicadas a toda la comunidad universitaria.</h3><br>
@@ -225,12 +225,12 @@
                         <h4 class="header-title m-t-0 m-b-30">Enlaces de interés</h4>
                             <div class="text-xs-center m-b-20">
                                 <a href="">
-                                    <img src="{{ ('back/assets/images/logos/logo-fames.jpeg') }}" class="img-responsive img-thumbnail">
+                                    <img src="{{ ('assets/images/logos/logo-fames.jpeg') }}" class="img-responsive img-thumbnail">
                                 </a>
                             </div>
                             <div class="text-xs-center m-b-20">
                                 <a href="">
-                                    <img src="{{ ('back/assets/images/logos/front-udo.jpg') }}" class="img-responsive img-thumbnail">
+                                    <img src="{{ ('assets/images/logos/front-udo.jpg') }}" class="img-responsive img-thumbnail">
                                 </a>
                             </div>
                         </div>
@@ -243,34 +243,34 @@
         @include('front.layouts.footer')
 
         <!-- jQuery  -->
-        <script src="{{ asset('back/assets/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('back/assets/js/tether.min.js') }}"></script><!-- Tether for Bootstrap -->
-        <script src="{{ asset('back/assets/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('back/assets/js/waves.js') }}"></script>
-        <script src="{{ asset('back/assets/js/jquery.nicescroll.js') }}"></script>
-        <script src="{{ asset('back/assets/plugins/switchery/switchery.min.js') }}"></script>
-        <script src="{{ asset('back/assets/plugins/jquery.steps/build/jquery.steps.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('back/assets/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
-        <script src="{{ asset('back/assets/pages/jquery.wizard-init.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('back/assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/tether.min.js') }}"></script><!-- Tether for Bootstrap -->
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/js/waves.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
+        <script src="{{ asset('assets/plugins/switchery/switchery.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery.steps/build/jquery.steps.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('assets/pages/jquery.wizard-init.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
         <!-- Modernizr js -->
-        <script src="{{ asset('back/assets/js/modernizr.min.js') }}"></script>
-        <script src="{{ asset('back/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+        <script src="{{ asset('assets/js/modernizr.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 
         <!-- Sweet Alert js -->
-        <script src="{{ asset('back/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js') }}"></script>
-        <script src="{{ asset('back/assets/pages/jquery.sweet-alert.init.js') }}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap-sweetalert/sweet-alert.min.js') }}"></script>
+        <script src="{{ asset('assets/pages/jquery.sweet-alert.init.js') }}"></script>
 
         <!-- Required datatable js -->
-        <script src="{{ asset('back/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('back/assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         <!-- BEGIN PAGE SCRIPTS -->
-        <script src="{{ asset('back/assets/plugins/moment/moment.js') }}"></script>
-        <script src='{{ asset('back/assets/plugins/fullcalendar/dist/fullcalendar.min.js') }}'></script>
-        <script src='{{ asset('back/assets/plugins/fullcalendar/dist/lang/es.js') }}'></script>
-        <script src="{{ asset('back/assets/pages/jquery.fullcalendar.js') }}"></script>
+        <script src="{{ asset('assets/plugins/moment/moment.js') }}"></script>
+        <script src='{{ asset('assets/plugins/fullcalendar/dist/fullcalendar.min.js') }}'></script>
+        <script src='{{ asset('assets/plugins/fullcalendar/dist/lang/es.js') }}'></script>
+        <script src="{{ asset('assets/pages/jquery.fullcalendar.js') }}"></script>
 
         <script>
             var resizefunc = [];
@@ -278,24 +278,24 @@
 
         {{--
         <!--Morris Chart-->
-		<script src="{{ asset('back/assets/plugins/morris/morris.min.js') }}"></script>
-		<script src="{{ asset('back/assets/plugins/raphael/raphael-min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/morris/morris.min.js') }}"></script>
+		<script src="{{ asset('assets/plugins/raphael/raphael-min.js') }}"></script>
         
 
         <!-- Counter Up  -->
-        <script src="{{ asset('back/assets/plugins/waypoints/lib/jquery.waypoints.js') }}"></script>
-        <script src="{{ asset('back/assets/plugins/counterup/jquery.counterup.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/waypoints/lib/jquery.waypoints.js') }}"></script>
+        <script src="{{ asset('assets/plugins/counterup/jquery.counterup.min.js') }}"></script>
 
         <!-- App js -->
-        <script src="{{ asset('back/assets/js/jquery.core.js') }}"></script>
-        <script src="{{ asset('back/assets/js/jquery.app.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.core.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.app.js') }}"></script>
 
         <!-- Page specific js -->
-        <script src="{{ asset('back/assets/pages/jquery.dashboard.js') }}"></script>
+        <script src="{{ asset('assets/pages/jquery.dashboard.js') }}"></script>
         --}}
 
         <!-- Custom js -->
-        <script src="{{ asset('back/assets/js/custom.js') }}"></script>
+        <script src="{{ asset('assets/js/custom.js') }}"></script>
         @section('javascripts')
         <script type="text/javascript">
         var miFecha = new Date(); 

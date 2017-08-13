@@ -50,7 +50,7 @@ return [
 
         'users' => [
             'driver' => 'local',
-            'root' => public_path().'/uploads/usuarios',
+            'root' => base_path().'/uploads/usuarios',
         ],
 
         'public' => [
