@@ -27,6 +27,11 @@
 @section('javascripts')
 <script type="text/javascript">
 	var array = [];
+	@foreach($fechas as $data)
+	var separarFecha = "{!! $data->fechaCita !!}".split("-");
+	var fechaNormal = separarFecha[2]+"/"+separarFecha[1]+"/"+separarFecha[0];
+	array.push(fechaNormal);
+	@endforeach
 	$('#fechaCita').datepicker({
 		format: "dd/mm/yyyy",
 		autoclose: true,

@@ -13,7 +13,8 @@
 				<div class="col-sm-12 col-xs-12 col-md-12">
 					{!! Form::open(['route' => 'registrarSolicitudBR', 'method' => 'post', 'id' => 'solicitudBRForm', 'name' => 'solicitudBRForm', 'class' => '', 'novalidate' => 'novalidate', 'role' => 'form']) !!}
 						@include('back.estudiantes.becas.form.solicitudFormType')
-						@include('back.estudiantes.becas.requisitosSolicitud')
+						@include('back.estudiantes.becas.form.requisitosSolicitud')
+						{!! Form::hidden('peticion', 5, ['class' => 'form-control', 'id' => 'peticion']) !!}
 					{!! Form::close()!!}
 				</div>
 			</div>

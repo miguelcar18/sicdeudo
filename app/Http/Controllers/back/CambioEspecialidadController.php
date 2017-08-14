@@ -21,21 +21,37 @@ use Response;
 class CambioEspecialidadController extends Controller
 {
     public function formularioCita() {
-    	return view("back.estudiantes.cambioEspecialidad.solicitud");
+        $fechas = Citas::select('fechaCita', \DB::raw('COUNT(fechaCita) as total'))
+                ->groupBy('fechaCita')
+                ->havingRaw('COUNT(fechaCita) > 6')->get();
+    	return view("back.estudiantes.cambioEspecialidad.solicitud", compact("fechas"));
     }
 
     public function registrarCita(Request $request) {
     	if($request->ajax()) {
-    		$separarFecha = explode('/', $request['fechaNacimiento']);
-            $fechaSql = $separarFecha[2].'-'.$separarFecha[1].'-'.$separarFecha[0];
-            $campos = [
-                'fechaCita' => $fechaSql, 
-                'usuario'   => $request['usuario']
-            ];
-            Citas::create($campos);
-            return response()->json([
-                'nuevoContenido' => $request->all()
-            ]);
+            $consulta = Citas::where('fechaCita', '>=', Carbon::now()->toDateString())->where('usuario', $request['usuario'])->firstOrFail();
+            if(count($consulta) == 0)
+            {
+                $separarFecha = explode('/', $request['fechaCita']);
+                $fechaSql = $separarFecha[2].'-'.$separarFecha[1].'-'.$separarFecha[0];
+                $campos = [
+                    'fechaCita' => $fechaSql, 
+                    'usuario'   => $request['usuario']
+                ];
+                Citas::create($campos);
+                return response()->json([
+                    'nuevoContenido' => $request->all(),
+                    'existente' => false
+                ]);
+            }
+            else{
+                $separarFecha = explode('-', $consulta->fechaCita);
+                $fechaSql = $separarFecha[2].'/'.$separarFecha[1].'/'.$separarFecha[0];
+                return response()->json([
+                    'existente' => true,
+                    'fecha' => $fechaSql
+                ]);
+            }
         }
     }
 

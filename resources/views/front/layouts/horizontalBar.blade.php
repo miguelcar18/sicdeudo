@@ -15,16 +15,13 @@
                 <li>
                     <a href="{{ URL::route('login.index') }}"><i class="zmdi zmdi-key"></i><span> Iniciar sesión </span> </a>
                 </li>
+                @foreach($redes as $red)
                 <li style="float: right">
-                    <a href="https://www.facebook.com/ADS.UDO.MONAGAS/?hc_ref=ARTdJwV8qqEGBxPgQ2cll0SkCu8oujvoD5gDDJmOJeZeq6Fw3VszWNjKwL42156JDsg&fref=nf" target="_blank" style="padding-top: 17px; padding-bottom: 17px">
-                        <i class="zmdi zmdi-facebook-box" style="font-size: 28px;"></i>
+                    <a href="{{ $red->url }}" target="_blank" style="padding-top: 17px; padding-bottom: 17px">
+                        <i class="zmdi zmdi-{!!$red->nombre!!}-box" style="font-size: 28px;"></i>
                     </a>
                 </li>
-                <li style="float: right">
-                    <a href="#" style="padding-top: 17px; padding-bottom: 17px">
-                        <i class="zmdi zmdi-twitter-box" style="font-size: 28px;"></i>
-                    </a>
-                </li>
+                @endforeach
             </ul>
             <!-- End navigation menu  -->
         </div>

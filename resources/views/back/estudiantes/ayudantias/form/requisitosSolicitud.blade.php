@@ -1,4 +1,4 @@
-<h4 class="header-title m-t-0">REQUISITOS A CONSIGNAR PARA PROGRAMA DE AYUDANTÍA ORDINARIA</h4>
+<h4 class="header-title m-t-0">REQUISITOS A CONSIGNAR PARA PROGRAMA DE AYUDANTÍA {!! ucwords($tituloAyudantia) !!}</h4>
 <div class="p-20">
 	<div class="form-group row">
 		<label for="requisitos" class="col-sm-12 form-control-label">1. Fotocopia de la cédula de identidad ampliada.</label>
@@ -9,11 +9,11 @@
 		<label for="requisitos" class="col-sm-12 form-control-label">6. Constancia de trabajo del principal proveedor especificando sueldo.</label>
 		<label for="requisitos" class="col-sm-12 form-control-label">7. Fotocopia de recibo de luz, agua o teléfono.</label>
 		<label for="requisitos" class="col-sm-12 form-control-label">8. Carpeta marrón con gancho.</label>
-		<label for="requisitos" class="col-sm-12 form-control-label text-danger">Debe imprimir la planilla de solicitud de ayudantía técnica y entregarla con todos los requisitos en la coordinación del programa de ayudantía técnica.</label>
+		<label for="requisitos" class="col-sm-12 form-control-label text-danger">Debe imprimir la planilla de solicitud de ayudantía {!! $tituloAyudantia !!} y entregarla con todos los requisitos en la coordinación del programa de ayudantía {!! $tituloAyudantia !!}.</label>
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-6">
-			{!! Form::button('Enviar', ['class'=> 'btn btn-primary waves-effect waves-light pull-right', 'id' => 'solicitudATSubmit', 'type' => 'submit', 'data' => 1]) !!}
+			{!! Form::button('Enviar', ['class'=> 'btn btn-primary waves-effect waves-light pull-right', 'id' => $idBotonEnviar, 'type' => 'submit', 'data' => 1, 'data-tipo' => $tituloAyudantia]) !!}
 		</div>
 		<div class="col-sm-6">
 			{!! Form::button('Cancelar', ['class'=> 'btn btn-secondary waves-effect m-l-5', 'id' => 'cancelar', 'type' => 'reset']) !!}

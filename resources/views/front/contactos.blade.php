@@ -21,7 +21,9 @@
 			<p>Campus los Guaritos</p>
 			<p>Edif. Comunal  2do Piso.</p>
 			<br>
-			<p>Búscanos por Facebook como: <a href="https://www.facebook.com/ADS.UDO.MONAGAS/?hc_ref=ARTdJwV8qqEGBxPgQ2cll0SkCu8oujvoD5gDDJmOJeZeq6Fw3VszWNjKwL42156JDsg&fref=nf" target="_blank">Área de Desarrollo Social UDO-Monagas</a></p>
+			@foreach($redes as $red)
+			<p>Búscanos por {!! $red->nombre !!} como: <a href="{{ $red->url }}" target="_blank">Área de Desarrollo Social UDO-Monagas</a></p>
+			@endforeach
 		</div><!-- end col-->
 	</div>
 	<!-- end row -->

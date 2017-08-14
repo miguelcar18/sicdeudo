@@ -22,18 +22,19 @@ Route::get('/contactos', ['as' => 'contactos', 'uses' => 'front\FrontController@
 
 Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::get('/', ['as' => 'dashboard', 'uses' => 'back\BackController@index']);
+
 	Route::get('/solicitud-ayudantias-ordinarias', ['as' => 'solicitudAyudantiaOrdinaria', 'uses' => 'back\AyudantiaController@solicitudOrdinaria']);
-	Route::post('/solicitud-ayudantias-ordinarias', ['as' => 'registrarSolicitudAO', 'uses' => 'back\AyudantiaController@registrarOrdinaria']);
 	Route::get('/renovacion-ayudantias-ordinarias', ['as' => 'renovacionAyudantiaOrdinaria', 'uses' => 'back\AyudantiaController@renovacionOrdinaria']);
-	Route::post('/renovacion-ayudantias-ordinarias', ['as' => 'registrarRenovacionAO', 'uses' => 'back\AyudantiaController@registrarRenovacionOrdinaria']);
 	Route::get('/solicitud-ayudantias-tecnicas', ['as' => 'solicitudAyudantiaTecnica', 'uses' => 'back\AyudantiaController@solicitudTecnica']);
-	Route::post('/solicitud-ayudantias-tecnicas', ['as' => 'registrarSolicitudAT', 'uses' => 'back\AyudantiaController@registrarTecnica']);
 	Route::get('/renovacion-ayudantias-tecnicas', ['as' => 'renovacionAyudantiaTecnica', 'uses' => 'back\AyudantiaController@renovacionTecnica']);
-	Route::post('/renovacion-ayudantias-tecnicas', ['as' => 'registrarRenovacionAT', 'uses' => 'back\AyudantiaController@registrarRenovacionTecnica']);
+	Route::post('/solicitud-ayudantias', ['as' => 'registrarSolicitud', 'uses' => 'back\AyudantiaController@registrarSolicitud']);
+	Route::post('/renovacion-ayudantias', ['as' => 'registrarRenovacion', 'uses' => 'back\AyudantiaController@registrarRenovacion']);
+
 	Route::get('/solicitud-becas-residencia', ['as' => 'solicitudBecasResidencia', 'uses' => 'back\BecaController@solicitud']);
-	Route::post('/solicitud-becas-residencia', ['as' => 'registrarSolicitudBR', 'uses' => 'back\BecaController@registrar']);
 	Route::get('/renovacion-becas-residencia', ['as' => 'renovacionBecasResidencia', 'uses' => 'back\BecaController@renovacion']);
+	Route::post('/solicitud-becas-residencia', ['as' => 'registrarSolicitudBR', 'uses' => 'back\BecaController@registrar']);
 	Route::post('/renovacion-becas-residencia', ['as' => 'registrarRenovacionBR', 'uses' => 'back\BecaController@registrarRenovacion']);
+
 	Route::get('/cita-cambio-especialidad', ['as' => 'citaCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@formularioCita']);
 	Route::post('/cita-cambio-especialidad', ['as' => 'registrarCita', 'uses' => 'back\CambioEspecialidadController@registrarCita']);
 	Route::get('/solicitudes-ayudantias-ordinarias', ['as' => 'solicitudesAyudantiasOrdinarias', 'uses' => 'back\AyudantiaController@listadoSolicitudesOrdinarias']);
@@ -71,6 +72,8 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::get('/reporte-estadistico', ['as' => 'formularioReporteEstadistico', 'uses' => 'back\BackController@formularioReporteEstadistico']);
 
 	Route::resource('usuarios', 'back\UserController');
+	Route::resource('redes-sociales', 'back\RedesSocialesController');
+	Route::resource('enlaces-interes', 'back\EnlacesInteresController');
 });
 
 Route::resource('login', 'back\LoginController');

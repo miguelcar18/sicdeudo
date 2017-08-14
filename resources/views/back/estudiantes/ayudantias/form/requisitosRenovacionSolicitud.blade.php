@@ -1,4 +1,4 @@
-<h4 class="header-title m-t-0">REQUISITOS A CONSIGNAR PARA PROGRAMA DE AYUDANTÍA TÉCNICA</h4>
+<h4 class="header-title m-t-0">REQUISITOS A CONSIGNAR PARA PROGRAMA DE AYUDANTÍA {!! ucwords($tituloAyudantia) !!}</h4>
 <div class="p-20">
 	<div class="form-group row">
 		<label for="requisitos" class="col-sm-12 form-control-label">1. Record académico actualizado.</label>
@@ -7,7 +7,7 @@
 	</div>
 	<div class="form-group row">
 		<div class="col-sm-6">
-			{!! Form::button('Enviar', ['class'=> 'btn btn-primary waves-effect waves-light pull-right', 'id' => 'renovacionATSubmit', 'type' => 'submit', 'data' => 1]) !!}
+			{!! Form::button('Enviar', ['class'=> 'btn btn-primary waves-effect waves-light pull-right', 'id' => $idBotonEnviar, 'type' => 'submit', 'data' => 1, 'data-tipo' => $tituloAyudantia]) !!}
 		</div>
 		<div class="col-sm-6">
 			{!! Form::button('Cancelar', ['class'=> 'btn btn-secondary waves-effect m-l-5', 'id' => 'cancelar', 'type' => 'reset']) !!}

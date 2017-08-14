@@ -44,8 +44,9 @@
     	<!-- Navigation Bar-->
 		<header id="topnav" style="background-color: #2b3d51">
         	@include('back.layouts.navbar')
+            {{--
             @if(Auth::user()->rol == 1)
-            {{-- @include('back.layouts.horizontalBar') --}}
+            @include('back.layouts.horizontalBar')
             @include('back.layouts.horizontalBarEstudiante')
             @elseif(Auth::user()->rol == 2)
             @include('back.layouts.horizontalBarEstudiante')
@@ -56,6 +57,8 @@
             @elseif(Auth::user()->rol == 5)
             @include('back.layouts.horizontalBarJefe')
             @endif
+            --}}
+            @include('back.layouts.horizontalBar')
     	</header>
 		<!-- End Navigation Bar-->
         <div class="wrapper">

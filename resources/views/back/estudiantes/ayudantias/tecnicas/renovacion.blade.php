@@ -11,9 +11,10 @@
 		<div class="card-box">
 			<div class="row">
 				<div class="col-sm-12 col-xs-12 col-md-12">
-					{!! Form::open(['route' => 'registrarRenovacionAT', 'method' => 'post', 'id' => 'renovacionATForm', 'name' => 'renovacionATForm', 'class' => '', 'novalidate' => 'novalidate', 'role' => 'form']) !!}
-						@include('back.estudiantes.ayudantias.tecnicas.form.renovacionFormType')
-						@include('back.estudiantes.ayudantias.tecnicas.requisitosRenovacionSolicitud')
+					{!! Form::open(['route' => 'registrarRenovacion', 'method' => 'post', 'id' => 'renovacionATForm', 'name' => 'renovacionATForm', 'class' => 'ayudantiaForm', 'novalidate' => 'novalidate', 'role' => 'form']) !!}
+						@include('back.estudiantes.ayudantias.form.renovacionFormType')
+						@include('back.estudiantes.ayudantias.form.requisitosRenovacionSolicitud', ['tituloAyudantia' => 'técnica', 'idBotonEnviar' => 'renovacionATSubmit'])
+						{!! Form::hidden('peticion', 4, ['class' => 'form-control', 'id' => 'peticion']) !!}
 					{!! Form::close()!!}
 				</div>
 			</div>

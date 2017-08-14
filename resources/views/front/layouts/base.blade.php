@@ -43,7 +43,7 @@
     	<!-- Navigation Bar-->
 		<header id="topnav" style="background-color: #2b3d51">
         	@include('front.layouts.navbar')
-            @include('front.layouts.horizontalBar')
+            @include('front.layouts.horizontalBar', ['redes' => $redes])
     	</header>
 		<!-- End Navigation Bar-->
         <div class="wrapper">
@@ -223,16 +223,13 @@
                     <div class="col-xs-12 col-lg-12 col-xl-4">
                         <div class="card-box">
                         <h4 class="header-title m-t-0 m-b-30">Enlaces de interés</h4>
+                            @foreach($enlaces as $enlace)
                             <div class="text-xs-center m-b-20">
-                                <a href="">
-                                    <img src="{{ ('assets/images/logos/logo-fames.jpeg') }}" class="img-responsive img-thumbnail">
+                                <a href="{{ $enlace->url }}" target="_blank">
+                                    <img src="{{ asset('assets/images/logos/'.$enlace->path) }}" class="img-responsive img-thumbnail">
                                 </a>
                             </div>
-                            <div class="text-xs-center m-b-20">
-                                <a href="">
-                                    <img src="{{ ('assets/images/logos/front-udo.jpg') }}" class="img-responsive img-thumbnail">
-                                </a>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

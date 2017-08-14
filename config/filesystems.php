@@ -53,6 +53,11 @@ return [
             'root' => base_path().'/uploads/usuarios',
         ],
 
+        'enlaces' => [
+            'driver' => 'local',
+            'root' => base_path().'/assets/images/logos',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

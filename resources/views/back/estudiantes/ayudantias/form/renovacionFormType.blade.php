@@ -127,7 +127,7 @@
 		</div>
 	</div>
 	<div class="form-group row">
-		<label for="tareasAyudante" class="col-sm-2 form-control-label">Tareas a Desempeñar por el Ayudante <span class="text-danger">*</span></label>
+		<label for="tareasAyudante" class="col-sm-2 form-control-label">Tareas a Desempeñar por el Ayudante</label>
 		<div class="col-sm-4">
 			{!! Form::textarea('tareasAyudante', null, $attributes = array('id' => 'tareasAyudante', 'class' => 'form-control', 'rows' => '3')) !!}
 		</div>

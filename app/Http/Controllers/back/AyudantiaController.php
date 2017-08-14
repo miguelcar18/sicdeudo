@@ -25,7 +25,11 @@ class AyudantiaController extends Controller
     	return view("back.estudiantes.ayudantias.ordinarias.solicitud");
     }
 
-    public function registrarOrdinaria(Request $request) {
+    public function solicitudTecnica() {
+        return view("back.estudiantes.ayudantias.tecnicas.solicitud");
+    }
+
+    public function registrarSolicitud(Request $request) {
     	if($request->ajax()) {
     		$separarFecha = explode('/', $request['fechaNacimiento']);
             $fechaSql = $separarFecha[2].'-'.$separarFecha[1].'-'.$separarFecha[0];
@@ -69,7 +73,7 @@ class AyudantiaController extends Controller
                 'status'        => 'Pendiente', 
                 'observaciones' => '', 
                 'estudiante'    => $idEstudiante, 
-                'peticion'      => 1
+                'peticion'      => $request['peticion']
             ];
             DatosAcademicos::create($camposAcademicos);
             DatosInteresAyudantias::create($camposInteres);
@@ -84,130 +88,11 @@ class AyudantiaController extends Controller
         return view("back.estudiantes.ayudantias.ordinarias.renovacion");
     }
 
-    public function registrarRenovacionOrdinaria(Request $request) {
-        if($request->ajax()) {
-            $camposGenerales = [
-                'apellidosNombres'      => $request['apellidosNombres'], 
-                'cedula'                => $request['cedula'], 
-                'edad'                  => $request['edad'], 
-                'estadoCivil'           => $request['estadoCivil'], 
-                'estado'                => $request['estado'], 
-                'direccionPermanente'   => $request['direccionPermanente'], 
-                'direccionLocal'        => $request['direccionLocal'], 
-                'telefonoCelular'       => $request['telefonoCelular'], 
-                'telefonoReferencia'    => $request['telefonoReferencia'], 
-                'email'                 => $request['email'], 
-                'supervisor'            => 1, 
-                'usuario'               => $request['usuario']
-            ];
-            DatosPersonales::create($camposGenerales);
-            $idEstudiante = \DB::getPdo()->lastInsertId();
-            $camposAcademicos = [
-                'estudiante'                        => $idEstudiante, 
-                'especialidad'                      => $request['especialidad'], 
-                'escuela'                           => $request['escuela'], 
-                'anioIngresoUdo'                    => $request['anioIngresoUdo'], 
-                'anioIngresoPrograma'               => $request['anioIngresoPrograma'], 
-                'semestreActual'                    => $request['semestreActual'], 
-                'promedioSemestreAnterior'          => $request['promedioSemestreAnterior'], 
-                'materiasInscritasSemestreAnterior' => $request['materiasInscritasSemestreAnterior'], 
-                'materiasCursadasSemestreAnterior'  => $request['materiasCursadasSemestreAnterior'], 
-                'materiasAprobadasSemestreAnterior' => $request['materiasAprobadasSemestreAnterior'], 
-                'materiasRetiradasSemestreAnterior' => $request['materiasRetiradasSemestreAnterior']
-            ];
-            $camposSupervisor = [
-                'estudiante'            => $idEstudiante, 
-                'nombre'                => $request['nombre'], 
-                'dependencia'           => $request['dependencia'], 
-                'extensionTelefono'     => $request['extensionTelefono'], 
-                'relacion'              => $request['relacion'], 
-                'tareasAyudante'        => $request['tareasAyudante'], 
-                'permanecerSitio'       => $request['permanecerSitio'], 
-                'detallesPermanencia'   => $request['detallesPermanencia'], 
-                'reubicacion'           => $request['reubicacion']
-            ];
-            $camposPeticiones = [
-                'status'        => 'Pendiente', 
-                'observaciones' => '', 
-                'estudiante'    => $idEstudiante, 
-                'peticion'      => 2
-            ];
-            DatosAcademicos::create($camposAcademicos);
-            Supervisor::create($camposSupervisor);
-            PeticionesEstudiantes::create($camposPeticiones);
-            $idSupervisor = \DB::getPdo()->lastInsertId();
-            $this->estudiante = DatosPersonales::find($idEstudiante);
-            $this->estudiante->supervisor = $idSupervisor;
-            $this->estudiante->save();
-            return response()->json([
-                'nuevoContenido' => $request->all()
-            ]);
-        }
-    }
-
-    public function solicitudTecnica() {
-        return view("back.estudiantes.ayudantias.tecnicas.solicitud");
-    }
-
-    public function registrarTecnica(Request $request) {
-        if($request->ajax()) {
-            $separarFecha = explode('/', $request['fechaNacimiento']);
-            $fechaSql = $separarFecha[2].'-'.$separarFecha[1].'-'.$separarFecha[0];
-            $camposGenerales = [
-                'apellidosNombres'      => $request['apellidosNombres'], 
-                'cedula'                => $request['cedula'], 
-                'edad'                  => $request['edad'], 
-                'fechaNacimiento'       => $fechaSql, 
-                'estadoCivil'           => $request['estadoCivil'], 
-                'lugarNacimiento'       => $request['lugarNacimiento'], 
-                'direccionPermanente'   => $request['direccionPermanente'], 
-                'direccionLocal'        => $request['direccionLocal'], 
-                'telefonoCelular'       => $request['telefonoCelular'], 
-                'telefonoReferencia'    => $request['telefonoReferencia'], 
-                'email'                 => $request['email'], 
-                'supervisor'            => 1, 
-                'usuario'               => $request['usuario']
-            ];
-            DatosPersonales::create($camposGenerales);
-            $idEstudiante = \DB::getPdo()->lastInsertId();
-            $camposAcademicos = [
-                'estudiante'                => $idEstudiante, 
-                'especialidad'              => $request['especialidad'], 
-                'escuela'                   => $request['escuela'], 
-                'anioIngresoUdo'            => $request['anioIngresoUdo'], 
-                'anioIngresoPrograma'       => $request['anioIngresoPrograma'], 
-                'semestreActual'            => $request['semestreActual'], 
-                'creditosSemestreAnterior'  => $request['creditosSemestreAnterior'], 
-                'creditosAprobadosCarrera'  => $request['creditosAprobadosCarrera'],
-                'promedioSemestreAnterior'  => $request['promedioSemestreAnterior'], 
-                'numeroMateriasInscritas'    => $request['numeroMateriasInscritas'], 
-                'numeroCreditosInscritos'    => $request['numeroCreditosInscritos']
-            ];
-            $camposInteres = [
-                'estudiante'    => $idEstudiante, 
-                'habilidades'   => $request['habilidades'], 
-                'observaciones' => $request['observaciones']
-            ];
-            $camposPeticiones = [
-                'status'        => 'Pendiente', 
-                'observaciones' => '', 
-                'estudiante'    => $idEstudiante, 
-                'peticion'      => 3
-            ];
-            DatosAcademicos::create($camposAcademicos);
-            DatosInteresAyudantias::create($camposInteres);
-            PeticionesEstudiantes::create($camposPeticiones);
-            return response()->json([
-                'nuevoContenido' => $request->all()
-            ]);
-        }
-    }
-
     public function renovacionTecnica() {
         return view("back.estudiantes.ayudantias.tecnicas.renovacion");
     }
 
-    public function registrarRenovacionTecnica(Request $request) {
+    public function registrarRenovacion(Request $request) {
         if($request->ajax()) {
             $camposGenerales = [
                 'apellidosNombres'      => $request['apellidosNombres'], 
@@ -253,11 +138,11 @@ class AyudantiaController extends Controller
                 'status'        => 'Pendiente', 
                 'observaciones' => '', 
                 'estudiante'    => $idEstudiante, 
-                'peticion'      => 4
+                'peticion'      => $request['peticion']
             ];
             DatosAcademicos::create($camposAcademicos);
-            Supervisor::create($camposSupervisor);
             PeticionesEstudiantes::create($camposPeticiones);
+            Supervisor::create($camposSupervisor);
             $idSupervisor = \DB::getPdo()->lastInsertId();
             $this->estudiante = DatosPersonales::find($idEstudiante);
             $this->estudiante->supervisor = $idSupervisor;

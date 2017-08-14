@@ -25,6 +25,10 @@ class BecaController extends Controller
     	return view("back.estudiantes.becas.solicitud");
     }
 
+    public function renovacion() {
+        return view("back.estudiantes.becas.renovacion");
+    }
+
     public function registrar(Request $request) {
     	if($request->ajax()) {
     		$separarFecha = explode('/', $request['fechaNacimiento']);
@@ -69,7 +73,7 @@ class BecaController extends Controller
                 'status'        => 'Pendiente', 
                 'observaciones' => '', 
                 'estudiante'    => $idEstudiante, 
-                'peticion'      => 5
+                'peticion'      => $request['peticion']
             ];
             DatosAcademicos::create($camposAcademicos);
             DatosInteresBecas::create($camposInteres);
@@ -78,10 +82,6 @@ class BecaController extends Controller
                 'nuevoContenido' => $request->all()
             ]);
         }
-    }
-
-    public function renovacion() {
-        return view("back.estudiantes.becas.renovacion");
     }
 
     public function registrarRenovacion(Request $request) {
@@ -125,10 +125,10 @@ class BecaController extends Controller
                 'status'        => 'Pendiente', 
                 'observaciones' => '', 
                 'estudiante'    => $idEstudiante, 
-                'peticion'      => 6
+                'peticion'      => $request['peticion']
             ];
             DatosAcademicos::create($camposAcademicos);
-            Supervisor::create($camposInteres);
+            DatosInteresBecas::create($camposInteres);
             PeticionesEstudiantes::create($camposPeticiones);
             return response()->json([
                 'nuevoContenido' => $request->all()
