@@ -1,11 +1,11 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-<title>Solicitudes de ayudantías ordinarias - Sicdeudo</title>
+<title>Solicitudes de becas de residencia - Sicdeudo</title>
 @stop
 
 @section('content')
-@include('back.layouts.content-title', ['titulo' => 'Solicitudes de Ayudantías Ordinarias'])
+@include('back.layouts.content-title', ['titulo' => 'Solicitudes de Becas de Residencia'])
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card-box table-responsive">
@@ -24,7 +24,7 @@
 					@foreach($solicitudes as $solicitud)
 					<tr>
 						<td>
-							<a href="{{ URL::route('formularioRequisitosAO', $solicitud->estudiante) }}">
+							<a href="{{ URL::route('formularioRequisitosBeca', $solicitud->id) }}">
 								{{ number_format($solicitud->nombreEstudiante->cedula, 0, '', '.') }}
 							</a>
 						</td>
@@ -101,6 +101,13 @@
 				},
 			}
 		});
+
+		@if(Session::has('message'))
+			setTimeout(function () {
+				var mensaje1 = "{{ Session::get('message') }}";
+				swal("Realizado!", mensaje1, "success");
+			}, 10);
+		@endif
 	});
 </script>
 @stop

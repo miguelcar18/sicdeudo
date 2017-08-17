@@ -22,12 +22,12 @@
             </div>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" id="botones" style="display: none">
         <div class="col-sm-6">
             {!! Form::button('Enviar', ['class'=> 'btn btn-primary waves-effect waves-light pull-right', 'id' => 'renovacionAOSubmit', 'type' => 'submit', 'data' => 1]) !!}
         </div>
         <div class="col-sm-6">
-            {!! Form::button('Cancelar', ['class'=> 'btn btn-secondary waves-effect m-l-5', 'id' => 'cancelar', 'type' => 'reset']) !!}
+            {!! Form::button('Regresar', ['class'=> 'btn btn-secondary waves-effect m-l-5', 'id' => 'cancelar', 'type' => 'button', 'onclick' => "document.location.href = '".URL::route('renovacionesBecasResidencia')."'"]) !!}
         </div>
     </div>
 </div>

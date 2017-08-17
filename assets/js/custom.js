@@ -1001,6 +1001,163 @@ $("form#solicitudCEForm").validate({
     },
 });
 
+$('input#checkbox1, input#checkbox2, input#checkbox3, input#checkbox4, input#checkbox5, input#checkbox6, input#checkbox7, input#checkbox8, input#checkbox9, input#checkbox10, input#checkbox11').on('click', function(){
+    if($('#checkbox1').is(':checked') && $('#checkbox2').is(':checked') && $('#checkbox3').is(':checked') && $('#checkbox4').is(':checked') && $('#checkbox5').is(':checked') && $('#checkbox6').is(':checked') && $('#checkbox7').is(':checked') && $('#checkbox8').is(':checked') && $('#checkbox9').is(':checked') && $('#checkbox10').is(':checked') && $('#checkbox11').is(':checked')){
+        $('div#botones').css('display', 'flex');
+    }
+    else{
+        $('div#botones').css('display', 'none');
+    }
+});
+
+$("form.registrarRequisitos").validate({
+    rules: {
+        checkbox1: {
+            required: true
+        },
+        checkbox2: {
+            required: true
+        },
+        checkbox3: {
+            required: true
+        },
+        checkbox4: {
+            required: true
+        },
+        checkbox5: {
+            required: true
+        },
+        checkbox6: {
+            required: true
+        },
+        checkbox7: {
+            required: true
+        },
+        checkbox8: {
+            required: true
+        },
+        checkbox9: {
+            required: true
+        },
+        checkbox10: {
+            required: true
+        },
+        checkbox11: {
+            required: true
+        }
+    },
+    messages: {
+        checkbox1: {
+            required: "Verifique este documento"
+        },
+        checkbox2: {
+            required: "Verifique este documento"
+        },
+        checkbox3: {
+            required: "Verifique este documento"
+        },
+        checkbox4: {
+            required: "Verifique este documento"
+        },
+        checkbox5: {
+            required: "Verifique este documento"
+        },
+        checkbox6: {
+            required: "Verifique este documento"
+        },
+        checkbox7: {
+            required: "Verifique este documento"
+        },
+        checkbox8: {
+            required: "Verifique este documento"
+        },
+        checkbox9: {
+            required: "Verifique este documento"
+        },
+        checkbox10: {
+            required: "Verifique este documento"
+        },
+        checkbox11: {
+            required: "Verifique este documento"
+        }
+    },
+    invalidHandler: function (event, validator) { 
+        $('.alert-error', $('.login-form')).show();
+    },
+    highlight: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-info').addClass('has-danger');
+    },
+    success: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-danger').addClass('has-success');
+        $(e).remove();
+    },
+    errorPlacement: function (error, element) {
+        error.insertAfter(element);
+    }
+});
+
+$('input#check1, input#check2, input#check3, input#check4').on('click', function(){
+    if($('#check1').is(':checked') && $('#check2').is(':checked') && $('#check3').is(':checked') && $('#check4').is(':checked')){
+        $('div#botones').css('display', 'flex');
+    }
+    else{
+        $('div#botones').css('display', 'none');
+    }
+});
+
+$("form.registrarRenovacion").validate({
+    rules: {
+        check1: {
+            required: true
+        },
+        check2: {
+            required: true
+        },
+        check3: {
+            required: true
+        },
+        check4: {
+            required: true
+        }
+    },
+    messages: {
+        check1: {
+            required: "Verifique este documento"
+        },
+        check2: {
+            required: "Verifique este documento"
+        },
+        check3: {
+            required: "Verifique este documento"
+        },
+        check4: {
+            required: "Verifique este documento"
+        }
+    },
+    invalidHandler: function (event, validator) { 
+        $('.alert-error', $('.login-form')).show();
+    },
+    highlight: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-info').addClass('has-danger');
+    },
+    success: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-danger').addClass('has-success');
+        $(e).remove();
+    },
+    errorPlacement: function (error, element) {
+        error.insertAfter(element);
+    }
+});
+
+$('input#chk1, input#chk2, input#chk3, input#chk4, input#chk5, input#chk6, input#chk7').on('click', function(){
+    if($('#chk1').is(':checked') && $('#chk2').is(':checked') && $('#chk3').is(':checked') && $('#chk4').is(':checked') && $('#chk5').is(':checked') && $('#chk6').is(':checked') && $('#chk7').is(':checked')){
+        $('div#botones').css('display', 'flex');
+    }
+    else{
+        $('div#botones').css('display', 'none');
+    }
+});
+
 $("form#redSocialForm").validate({
     rules: {
         url: {

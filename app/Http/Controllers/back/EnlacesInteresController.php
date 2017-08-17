@@ -199,7 +199,7 @@ class EnlacesInteresController extends Controller
             }
             else {
                 Session::flash('message', 'Enlace "' . $this->enlace->nombre . '" eliminado satisfactoriamente');
-                return Redirect::route('back.enlaces-interes.index');
+                return Redirect::route('enlaces-interes.index');
             }   
         }
         else

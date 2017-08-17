@@ -12,8 +12,13 @@
 			<div class="row">
 				<div class="col-sm-12 col-xs-12 col-md-12">
 					{!! Form::open(['route' => 'registrarRequisitosCambioEspecialidad', 'method' => 'post', 'id' => 'requisitosSolicitudCambioEspecialidadForm', 'name' => 'requisitosSolicitudCambioEspecialidadForm', 'class' => '', 'novalidate' => 'novalidate', 'role' => 'form']) !!}
-						@include('back.secretaria.datosCita')
+						@include('back.secretaria.form.datosCita', ["estudiante" => $estudiante])
+						@if($peticion->status == "Pendiente")
 						@include('back.secretaria.form.requisitosCambioEspecialidadFormType')
+						@elseif($peticion->status == "Revisado por secretaría")
+						<h4 style="text-align: center">Todos los documentos fueron entregados</h4>
+						@endif
+						{!! Form::hidden('peticion', $peticion->id, ['class' => 'form-control', 'id' => 'peticion']) !!}
 					{!! Form::close()!!}
 				</div>
 			</div>

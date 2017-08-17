@@ -65,8 +65,10 @@
 		});
 
 		@if(Session::has('message'))
-			var mensaje1 = "{{ Session::get('message') }}";
-			swal("¡Eliminado!", mensaje1, "success");
+			setTimeout(function () {
+				var mensaje1 = "{{ Session::get('message') }}";
+				swal("¡Eliminado!", mensaje1, "success");
+			}, 10);
 		@endif
 
         if ($('.tooltip-error').length) {

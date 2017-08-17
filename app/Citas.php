@@ -19,7 +19,7 @@ class Citas extends Model
      * @var array
      */
 
-    protected $fillable = ['fechaCita', 'usuario'];
+    protected $fillable = ['fechaCita', 'usuario', 'status'];
 
     public function nombreUsuario()
     {

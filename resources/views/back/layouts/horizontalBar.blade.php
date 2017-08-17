@@ -24,10 +24,43 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ URL::route('citaCambioEspecialidad') }}"><i class="zmdi zmdi-collection-text"></i><span> Cambios de especialidad </span> </a>
+                    <a href="#"><i class="zmdi zmdi-collection-text"></i><span> Cambios de especialidad </span> </a>
                 </li>
                 @elseif(Auth::user()->rol == 2)
+                <li class="has-submenu">
+                    <a href="#"><i class="zmdi zmdi-account-box-mail"></i> <span> Solicitudes recibidas </span> </a>
+                    <ul class="submenu">
+                        <li><a href="{{ URL::route('solicitudesAyudantiasOrdinarias') }}">Ayudantías ordinarias</a></li>
+                        <li><a href="{{ URL::route('solicitudesAyudantiasTecnicas') }}">Ayudantías técnicas</a></li>
+                        <li><a href="{{ URL::route('solicitudesBecasResidencia') }}">Becas de residencia</a></li>
+                        <li><a href="{{ URL::route('solicitudesCambioEspecialidad') }}">Cambios de especialidad</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#"><i class="zmdi zmdi-account-box-mail"></i> <span> Renovaciones recibidas </span> </a>
+                    <ul class="submenu">
+                        <li><a href="{{ URL::route('renovacionesAyudantiasOrdinarias') }}">Ayudantías ordinarias</a></li>
+                        <li><a href="{{ URL::route('renovacionesAyudantiasTecnicas') }}">Ayudantías técnicas</a></li>
+                        <li><a href="{{ URL::route('renovacionesBecasResidencia') }}">Becas de residencia</a></li>
+                    </ul>
+                </li>
                 @elseif(Auth::user()->rol == 3)
+                <li class="has-submenu">
+                    <a href="#"><i class="zmdi zmdi-account-box-mail"></i> <span> Solicitudes recibidas </span> </a>
+                    <ul class="submenu">
+                        <li><a href="{{ URL::route('solicitudesAyudantiasOrdinariasEs') }}">Ayudantías ordinarias</a></li>
+                        <li><a href="{{ URL::route('solicitudesAyudantiasTecnicasEs') }}">Ayudantías técnicas</a></li>
+                        <li><a href="{{ URL::route('solicitudesBecasResidenciaEs') }}">Becas de residencia</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#"><i class="zmdi zmdi-account-box-mail"></i> <span> Renovaciones recibidas </span> </a>
+                    <ul class="submenu">
+                        <li><a href="{{ URL::route('renovacionesAyudantiasOrdinariasEs') }}">Ayudantías ordinarias</a></li>
+                        <li><a href="{{ URL::route('renovacionesAyudantiasTecnicasEs') }}">Ayudantías técnicas</a></li>
+                        <li><a href="{{ URL::route('renovacionesBecasResidenciaEs') }}">Becas de residencia</a></li>
+                    </ul>
+                </li>
                 @elseif(Auth::user()->rol == 4)
                 @elseif(Auth::user()->rol == 5)
                 @elseif(Auth::user()->rol == 6)
