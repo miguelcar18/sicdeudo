@@ -17,6 +17,31 @@ function confirmSubmit(form, message) {
     } 
 }
 
+function addData(){
+    var table = document.getElementById("tablaCargaFamiliar").tBodies[0];
+   
+    var row = table.insertRow(-1);
+    var cell0 = row.insertCell(0);
+    var cell1 = row.insertCell(1);
+    var cell2 = row.insertCell(2);
+    var cell3 = row.insertCell(3);
+    var cell4 = row.insertCell(4);
+    var cell5 = row.insertCell(5);
+    var cell6 = row.insertCell(6);
+
+    cell0.innerHTML = '<input id="nombreCarga" class="form-control" placeholder="" name="nombreCarga[]" type="text" required>';
+    cell1.innerHTML = '<select id="parentesco" class="form-control" name="parentesco[]"><option value="" selected="selected">Seleccione</option><option value="Padre">Padre</option><option value="Madre">Madre</option><option value="Esposo/a">Esposo/a</option><option value="Hijo/a">Hijo/a</option></select required>';
+    cell2.innerHTML = '<input id="edad" class="form-control" placeholder="" min="0" name="edad[]" type="number" required>';
+    cell3.innerHTML = '<input id="oficio" class="form-control" placeholder="" name="oficio[]" type="text" required>';
+    cell4.innerHTML = '<input id="institucion" class="form-control" placeholder="" name="institucion[]" type="text">';
+    cell5.innerHTML = '<input id="sueldo" class="form-control" placeholder="0.00" min="0" name="sueldo[]" type="number">';
+    cell6.innerHTML = '<button class="btn waves-effect waves-light btn-danger" onclick="removeData(this)"> <i class="fa fa-minus"></i> </button>';
+}
+
+function removeData(row){
+    row.parentNode.parentNode.remove();
+}
+
 $("form#loginForm").validate({
     rules: {
         username: {

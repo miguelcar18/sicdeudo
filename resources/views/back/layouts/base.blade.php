@@ -82,7 +82,7 @@
         <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
         <script src="{{ asset('assets/plugins/switchery/switchery.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/jquery.steps/build/jquery.steps.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('assets/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('assets/plugins/jquery-validation/dist/jquery.validate.js') }}"></script>
         <script src="{{ asset('assets/pages/jquery.wizard-init.js') }}" type="text/javascript"></script>
 
         <!-- Modernizr js -->

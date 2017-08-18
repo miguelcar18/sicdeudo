@@ -350,13 +350,47 @@ class AyudantiaController extends Controller
     }
 
     public function listadoSolicitudesOrdinariasEs() {
-        $solicitudes = PeticionesEstudiantes::where('peticion', 1)->get();
-        return view("back.trabajador.solicitudesAyudantiasOrdinarias", compact('solicitudes'));
+        if(Auth::user()->rol == 3) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 1)->get();
+            return view("back.trabajador.ayudantias.ordinarias.solicitudesAyudantiasOrdinarias", compact('solicitudes'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
     }
 
-    public function formularioEstudioSEAO($id) {
-        $estudiante = DatosPersonales::find($id);
-        return view("back.trabajador.registrarAyudantiasOrdinarias", compact('estudiante'));
+    public function listadoRenovacionesOrdinariasEs() {
+        if(Auth::user()->rol == 3) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 2)->get();
+            return view("back.trabajador.ayudantias.ordinarias.renovacionesAyudantiasOrdinarias", compact('solicitudes'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function listadoSolicitudesTecnicasEs() {
+        if(Auth::user()->rol == 3) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 3)->get();
+            return view("back.trabajador.ayudantias.tecnicas.solicitudesAyudantiasTecnicas", compact('solicitudes'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function listadoRenovacionesTecnicasEs() {
+        if(Auth::user()->rol == 3) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 4)->get();
+            return view("back.trabajador.ayudantias.tecnicas.renovacionesAyudantiasTecnicas", compact('solicitudes'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
     }
 
     public function listadoSolicitudesOrdinariasAprobar() {

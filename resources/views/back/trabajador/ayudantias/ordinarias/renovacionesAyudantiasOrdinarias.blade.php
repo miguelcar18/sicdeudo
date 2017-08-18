@@ -1,11 +1,11 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-<title>Solicitudes de ayudantías ordinarias - Sicdeudo</title>
+<title>Renovaciones de ayudantías ordinarias - Sicdeudo</title>
 @stop
 
 @section('content')
-@include('back.layouts.content-title', ['titulo' => 'Solicitudes de Ayudantías Ordinarias'])
+@include('back.layouts.content-title', ['titulo' => 'Renovaciones de Ayudantías Ordinarias'])
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card-box table-responsive">
@@ -25,9 +25,7 @@
 					@foreach($solicitudes as $solicitud)
 					<tr>
 						<td>
-							<a href="{{ URL::route('formularioRequisitosAO', $solicitud->estudiante) }}">
-								{{ number_format($solicitud->nombreEstudiante->cedula, 0, '', '.') }}
-							</a>
+							{{ number_format($solicitud->nombreEstudiante->cedula, 0, '', '.') }}
 						</td>
 						<td>{{ $solicitud->nombreEstudiante->apellidosNombres }}</td>
 						<td>
@@ -75,7 +73,13 @@
 						<td>{{ number_format($solicitud->nombreEstudiante->datosAcademicos->promedioSemestreAnterior, 2, ',', '.') }}</td>
 						<td>{{ $solicitud->status }}</td>
 						<td>
-							<a class="btn btn-primary waves-effect waves-light" href="{{ URL::route('estudioSEAO', $solicitud->nombreEstudiante->id) }}"> <span>Estudio Socio-Económico</span> </a>
+							@if($solicitud->status == 'Pendiente')
+							<label>Debe ser revisado por secretaría</label>
+							@elseif($solicitud->status == 'Revisado por secretaría')
+							<a class="btn btn-primary waves-effect waves-light" href="{{ URL::route('estudioSE', [$solicitud->nombreEstudiante->id, 2]) }}"> <span>Estudio Socio-Económico</span> </a>
+							@else
+							<label>Estudio ya realizado</label>
+							@endif
 						</td>
 					</tr>
 					@endforeach
@@ -105,6 +109,13 @@
 				},
 			}
 		});
+
+		@if(Session::has('message'))
+			setTimeout(function () {
+				var mensaje1 = "{{ Session::get('message') }}";
+				swal("Realizado!", mensaje1, "success");
+			}, 10);
+		@endif
 	});
 </script>
 @stop

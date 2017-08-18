@@ -239,4 +239,26 @@ class BecaController extends Controller
             return Redirect::route('dashboard');
         }
     }
+
+    public function listadoBecasEs() {
+        if(Auth::user()->rol == 3) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 5)->get();
+            return view("back.trabajador.becas.solicitudesBecasResidencia", compact('solicitudes'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function listadoRenovacionesBecasEs() {
+        if(Auth::user()->rol == 3) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 6)->get();
+            return view("back.trabajador.becas.renovacionesBecasResidencia", compact('solicitudes'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
 }

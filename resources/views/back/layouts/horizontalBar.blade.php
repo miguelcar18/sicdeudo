@@ -62,7 +62,28 @@
                     </ul>
                 </li>
                 @elseif(Auth::user()->rol == 4)
-                @elseif(Auth::user()->rol == 5)
+                <li class="has-submenu">
+                    <a href="#"><i class="zmdi zmdi-account-box-mail"></i> <span> Solicitudes recibidas </span> </a>
+                    <ul class="submenu">
+                        <li><a href="{{ URL::route('solicitudesAyudantiasOrdinariasAprobar') }}">Ayudantías ordinarias</a></li>
+                        <li><a href="#">Ayudantías técnicas</a></li>
+                        <li><a href="#">Becas de residencia</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#"><i class="zmdi zmdi-account-box-mail"></i> <span> Renovaciones recibidas </span> </a>
+                    <ul class="submenu">
+                        <li><a href="#">Ayudantías ordinarias</a></li>
+                        <li><a href="#">Ayudantías técnicas</a></li>
+                        <li><a href="#">Becas de residencia</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ URL::route('formularioReportes') }}"><i class="zmdi zmdi-collection-text"></i><span> Reportes </span> </a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('usuarios.index') }}"><i class="zmdi zmdi-accounts"></i> <span> Administrar usuarios </span> </a>
+                </li>
                 @elseif(Auth::user()->rol == 6)
                 <li>
                     <a href="{{ URL::route('redes-sociales.index') }}"><i class="zmdi zmdi-laptop"></i> <span> Redes sociales </span> </a>

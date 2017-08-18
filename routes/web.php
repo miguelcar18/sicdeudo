@@ -71,7 +71,8 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::get('/renovaciones-ayudantias-tecnicas-es', ['as' => 'renovacionesAyudantiasTecnicasEs', 'uses' => 'back\AyudantiaController@listadoRenovacionesTecnicasEs']);
 	Route::get('/renovaciones-becas-residencia-es', ['as' => 'renovacionesBecasResidenciaEs', 'uses' => 'back\BecaController@listadoRenovacionesBecasEs']);
 
-	Route::get('/ayudantia-ordinaria-estudiose/{id}', ['as' => 'estudioSEAO', 'uses' => 'back\AyudantiaController@formularioEstudioSEAO']);
+	Route::get('/estudio-socio-economico/{id}/{peticion}', ['as' => 'estudioSE', 'uses' => 'back\BackController@formularioEstudioSE']);
+	Route::post('/estudio-socio-economico', ['as' => 'registrarES', 'uses' => 'back\BackController@registrarEstudioSE']);
 
 	Route::get('/solicitudes-ayudantias-ordinarias-aprobar', ['as' => 'solicitudesAyudantiasOrdinariasAprobar', 'uses' => 'back\AyudantiaController@listadoSolicitudesOrdinariasAprobar']);
 	Route::get('/ayudantia-ordinaria-aprobar/{id}', ['as' => 'AprobarAO', 'uses' => 'back\AyudantiaController@formularioAprobarAO']);

@@ -48,7 +48,8 @@
                 return $form_container.valid();
             },
             onFinished: function (event, currentIndex) {
-                alert("Submitted!");
+                //alert("Submitted!");
+                $form_container.submit();
             }
         });
 
@@ -72,7 +73,7 @@
 
         //form with validation
         this.createValidatorForm($("#wizard-validation-form"));
-        this.createValidatorForm($("#requisitosSolicitudAOESForm"));
+        this.createValidatorForm($("#requisitosESForm"));
 
         //vertical form
         this.createVertical($("#wizard-vertical"));

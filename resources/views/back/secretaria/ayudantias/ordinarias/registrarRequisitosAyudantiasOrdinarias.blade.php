@@ -15,7 +15,7 @@
 						@include('back.secretaria.form.datosEstudiante', ["estudiante" => $estudiante])
 						@if($peticion->status == "Pendiente")
 						@include('back.secretaria.form.requisitosAOFormType')
-						@elseif($peticion->status == "Revisado por secretaría")
+						@elseif($peticion->status != "Pendiente")
 						<h4 style="text-align: center">Todos los documentos fueron entregados</h4>
 						@endif
 						{!! Form::hidden('peticion', $peticion->id, ['class' => 'form-control', 'id' => 'peticion']) !!}
