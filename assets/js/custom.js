@@ -1384,3 +1384,450 @@ $("form#enlaceInteresEditForm").validate({
         return false;
     },
 });
+
+$("form#usuarioForm").validate({
+    rules: {
+        name: {
+            required: true
+        },
+        email: {
+            required: true,
+            email: true
+        },
+        username: {
+            required: true
+        },
+        password: {
+            required: true
+        },
+        password_confirmation: {
+            required: true,
+            equalTo: "#password"
+        },
+        rol: {
+            required: true
+        },
+        cedula: {
+            required: true
+        }
+    },
+    messages: {
+        name: {
+            required: 'Ingrese nombre y apellido'
+        },
+        username: {
+            required: 'Ingrese un nombre de usuario'
+        },
+        email: {
+            required: 'Ingrese un email',
+            email: 'Ingrese un email válido'
+        },
+        password: {
+            required: 'Ingrese una contraseña'
+        },
+        password_confirmation: {
+            required: 'Repita la contraseña',
+            equalTo: 'Las contraseñas deben de ser iguales'
+        },
+        rol: {
+            required: 'Seleccione un rol'
+        },
+        cedula: {
+            required: 'Ingrese un número de cédula'
+        }
+    },
+    invalidHandler: function (event, validator) { 
+        $('.alert-error', $('.login-form')).show();
+    },
+    highlight: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-info').addClass('has-danger');
+    },
+    success: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-danger').addClass('has-success');
+        $(e).remove();
+    },
+    errorPlacement: function (error, element) {
+        error.insertAfter(element);
+    },
+    submitHandler: function () {
+        var accion = '';
+        if($("button#usuarioSubmit").attr('data') == 1)
+            accion = 'agregado';
+        else if($("button#usuarioSubmit").attr('data') == 0)
+            accion = 'actualizado';
+        var alertMessage = 'Usuario '+accion+' satisfactoriamente';
+        var token = $("input[name=_token]").val();
+        var formData = new FormData($("form#usuarioForm")[0]);
+        $.ajax({
+            url:  $("form#usuarioForm").attr('action'),
+            type: $("form#usuarioForm").attr('method'),
+            headers: {'X-CSRF-TOKEN' : token},
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend:function(){
+                $("button#usuarioSubmit").addClass('disabled');
+                $("button#cancelar").addClass('disabled');
+            },
+            success:function(respuesta){
+                swal("¡Registrado!", alertMessage, "success");
+                if($("button#usuarioSubmit").attr('data') == 1)
+                {
+                    $('form#usuarioForm').reset();
+                    $('.form-group').removeClass('has-success');
+                }
+                $("button#usuarioSubmit").removeClass('disabled');
+                $("button#cancelar").removeClass('disabled');
+            }
+        })
+        return false;
+    }
+});
+$("form#usuarioEditarForm").validate({
+    rules: {
+        name: {
+            required: true
+        },
+        email: {
+            required: true,
+            email: true
+        },
+        username: {
+            required: true
+        },
+        password: {
+            required: false
+        },
+        password_confirmation: {
+            required: false,
+            equalTo: "#password"
+        },
+        rol: {
+            required: true
+        },
+        cedula: {
+            required:true
+        }
+    },
+    messages: {
+        name: {
+            required: 'Ingrese nombre y apellido'
+        },
+        username: {
+            required: 'Ingrese un nombre de usuario'
+        },
+        email: {
+            required: 'Ingrese un email',
+            email: 'Ingrese un email válido'
+        },
+        password: {
+            required: 'Ingrese una contraseña'
+        },
+        password_confirmation: {
+            required: 'Repita la contraseña',
+            equalTo: 'Las contraseñas deben de ser iguales'
+        },
+        rol: {
+            required: 'Seleccione un rol'
+        },
+        cedula:{
+            required: 'Ingrese un número de cédula'
+        }
+    },
+    invalidHandler: function (event, validator) { 
+        $('.alert-error', $('.login-form')).show();
+    },
+    highlight: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-info').addClass('has-danger');
+    },
+    success: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-danger').addClass('has-success');
+        $(e).remove();
+    },
+    errorPlacement: function (error, element) {
+        error.insertAfter(element);
+    },
+    submitHandler: function () {
+        var accion = '';
+        if($("button#usuarioEditarSubmit").attr('data') == 1)
+            accion = 'agregado';
+        else if($("button#usuarioEditarSubmit").attr('data') == 0)
+            accion = 'actualizado';
+        var alertMessage = 'Usuario '+accion+' satisfactoriamente';
+        var token = $("input[name=_token]").val();
+        var formData = new FormData($("form#usuarioEditarForm")[0]);
+        $.ajax({
+            url:  $("form#usuarioEditarForm").attr('action'),
+            type: $("form#usuarioEditarForm").attr('method'),
+            headers: {'X-CSRF-TOKEN' : token},
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend:function(){
+                $("button#usuarioEditarSubmit").addClass('disabled');
+                $("button#cancelar").addClass('disabled');
+            },
+            success:function(respuesta){
+                swal("¡Registrado!", alertMessage, "success");
+                if($("button#usuarioEditarSubmit").attr('data') == 1)
+                {
+                    $('form#usuarioEditarForm').reset();
+                    $('.form-group').removeClass('has-success');
+                }
+                $("button#usuarioEditarSubmit").removeClass('disabled');
+                $("button#cancelar").removeClass('disabled');
+            }
+        })
+        return false;
+    }
+});
+
+$('form#datosEstudiante').on('submit', function(e){
+    e.preventDefault();
+});
+
+$("form#cambioStatusForm").validate({
+    rules: {
+        status: {
+            required: true
+        }
+    },
+    messages: {
+        status: {
+            required: "Seleccione un status"
+        }
+    },
+    invalidHandler: function (event, validator) { 
+        $('.alert-error', $('.login-form')).show();
+    },
+    highlight: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-info').addClass('has-danger');
+    },
+    success: function (e) {
+        $(e).closest('.form-group > section').removeClass('has-danger').addClass('has-success');
+        $(e).remove();
+    },
+    errorPlacement: function (error, element) {
+        error.insertAfter(element);
+    },
+    submitHandler: function (form) {
+        var accion = '';
+        if($("button#cambioStatusSubmit").attr('data') == 1)
+            accion = 'registrado';
+        else if($("button#cambioStatusSubmit").attr('data') == 0)
+            accion = 'actualizado';
+        var alertMessage = 'Status '+accion+' satisfactoriamente';
+        var token = $("input[name=_token]").val();
+        var formData = new FormData($("form#cambioStatusForm")[0]);
+        $.ajax({
+            url:  $("form#cambioStatusForm").attr('action'),
+            type: $("form#cambioStatusForm").attr('method'),
+            headers: {'X-CSRF-TOKEN' : token},
+            data: new FormData($("form#cambioStatusForm")[0]),
+            processData: false,
+            contentType: false,
+            beforeSend:function(){
+                $("button#cambioStatusSubmit").addClass('disabled');
+                $("button#cancelar").addClass('disabled');
+            },
+            success:function(respuesta){
+                swal("¡Registrado!", alertMessage, "success");
+                if($("button#cambioStatusSubmit").attr('data') == 1)
+                {
+                    $('form#cambioStatusForm').reset();
+                    $('.form-group').removeClass('has-success');
+                }
+                $("button#cambioStatusSubmit").removeClass('disabled');
+                $("button#cancelar").removeClass('disabled');
+            }
+        })
+        return false;
+    },
+});
+
+$("#reporteForm").on('submit', function(e){
+    var accion = '';
+    var cargando = '<img src="images/loader.gif" />';
+    var token = $("input[name=_token]").val();
+    var formData = new FormData($("form#reporteForm")[0]);
+    $.ajax({
+        url:  $("form#reporteForm").attr('action'),
+        type: $("form#reporteForm").attr('method'),
+        headers: {'X-CSRF-TOKEN' : token},
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend:function(){
+            $('div#respuesta').html(cargando);
+            $('div#resultados').html(cargando);
+            $('.btn-primary').attr('disabled', true);
+        },
+        success:function(respuesta){
+            if(respuesta.cantidad == 0)
+            {
+                var alertMessage = '<div class="callout callout-danger" style="display: none">';
+                alertMessage += '<h4><i class="icon fa fa-ban"></i> No se han encontrado resultados.</h4>';
+                alertMessage += '</div>';
+                $('div#respuesta').html(alertMessage);
+                $('.callout').fadeIn();
+                $('.btn-primary').attr('disabled', false);
+                $('.callout').fadeOut(10000);
+                $("#resultados").empty();
+            }
+            else if(respuesta.cantidad > 0)
+            {
+                var contenido = '<div class="box">';
+                contenido += '<div class="box-success">';
+                contenido += '<table id="example1" class="table table-bordered table-striped">';
+                contenido += '<thead>';
+                contenido += '<tr>';
+                contenido += '<th>Técnico</th>';
+                contenido += '<th>Tipo de equipo</th>';
+                contenido += '<th>Fecha de ingreso</th>';
+                contenido += '<th>Estado</th>';
+                contenido += '<th>Acciones</th>';
+                contenido += '</tr>';
+                contenido += '</thead>';
+                contenido += '<tbody>';
+                $.each(respuesta.datos , function(i, val){
+                    
+
+                    contenido += '<tr>';
+                    contenido += '<td>'+val.nombre_tecnico.nombre+'</td>';
+                    contenido += '<td>'+val.tipo+'</td>';
+                    contenido += '<td>'+val.fecha_ingreso+'</td>';
+                    contenido += '<td>'+val.status+'</td>';
+                    contenido += '<td>';
+                    contenido += '<a href="http://'+window.location.host+'/provendos/public/equipos/'+val.id+'" data-rel="tooltip" title="Mostrar '+val.modelo+'" objeto="'+val.modelo+'">'; 
+                    contenido += '<span class="btn btn-sm btn-info"> <i class="glyphicon glyphicon-eye-open"></i> </span> ';
+                    contenido += '</a>';
+                    contenido += '&nbsp;';
+                    contenido += '<a href="http://'+window.location.host+'/provendos/public/equipos/'+val.id+'/edit" class="tooltip-success editar" data-rel="tooltip" title="Editar '+val.modelo+'" objeto="'+val.modelo+'" style="text-decoration:none;"> ';
+                    contenido += '<span class="btn btn-sm btn-warning"> <i class="glyphicon glyphicon-pencil"></i> </span> ';
+                    contenido += '</a>';
+                    contenido += '&nbsp;';
+                    contenido += '<a href="http://'+window.location.host+'/provendos/public/reporte/'+val.id+'" data-id="'+val.id+'" class="tooltip-imprimir" data-rel="tooltip" title="Ver reporte de '+val.modelo+'" objeto="'+val.id+'" target="_blank"> ';
+                    contenido += '<span class="btn btn-sm btn-success"> <i class="glyphicon glyphicon-file"></i> </span> ';
+                    contenido += '</a>';
+                    contenido += '&nbsp;';
+                    contenido += '<a href="#" data-id="'+val.id+'" class="tooltip-error borrar" data-rel="tooltip" title="Eliminar '+val.modelo+'" objeto="'+val.id+'"> ';
+                    contenido += '<span class="btn btn-sm btn-danger"> <i class="glyphicon glyphicon-trash"></i> </span> ';
+                    contenido += '</a>';
+                    contenido += '</td>';
+                    contenido += '</tr>';
+                });
+                contenido += '</tbody>';
+                contenido += '</table>';
+                contenido += '<form method="POST" action="http://'+window.location.host+'/provendos/public/equipos/USER_ID" accept-charset="UTF-8" role="form" id="form-delete"><input name="_method" type="hidden" value="DELETE">';
+                contenido += '<input name="_token" type="hidden" value="'+token+'">';
+                contenido += '</form>';
+                contenido += '</div>';
+                contenido += '</div>';
+                $('#resultados').html(contenido);
+                $('div#respuesta').empty();
+
+                $("#example1").DataTable({
+                    "language": {
+                        "lengthMenu": "Mostrar _MENU_ resultados por página",
+                        "zeroRecords": "Sin resultados",
+                        "info": "Mostrando página _PAGE_ de _PAGES_",
+                        "infoEmpty": "Sin ninguna información",
+                        "infoFiltered": "(Filtrado de _MAX_ resultados totales)",
+                        "search":         "Buscar:",
+                        "paginate": {
+                            "first":      "Primero",
+                            "last":       "Último",
+                            "next":       "Siguiente",
+                            "previous":   "Anterior"
+                        },
+                    }
+                });
+
+                if ($('.tooltip-error').length)
+                {
+                   $('.tooltip-error').click(function (e) {
+                        e.preventDefault();
+                        var message = "¿Está realmente seguro(a) de eliminar este equipo?";
+                        var id = $(this).data('id');
+                        var form = $('#form-delete');
+                        var action = form.attr('action').replace('USER_ID', id);
+                        var row =  $(this).parents('tr');
+
+                        if(confirm(message))
+                        {
+                            row.fadeOut(1000);
+                            $.post(action, form.serialize(), function(result) {
+                                if (result.success) {
+                                    setTimeout (function () {
+                                        row.delay(1000).remove();
+                                        var alertMessage = mensaje(result.msg);
+                                        $('#respuesta').html(alertMessage);
+                                        $('.callout-success').fadeIn();
+                                        $('.callout-success').fadeOut(10000);
+                                    }, 1000);                
+                                } 
+                                else 
+                                {
+                                    row.show();
+                                }
+                            }, 'json');
+                        } 
+                   });
+                }
+            }
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        if (jqXHR.status === 0) {
+            var alertMessageError = '<div class="callout callout-danger" style="display: block">';
+            alertMessageError += '<h4><i class="icon fa fa-ban"></i> ¡Error!</h4>';
+            alertMessageError += '<p>No se encuentra conectado con el servidor. Por favor verifique su conexión.</p>';
+            alertMessageError += '</div>';
+            $('div#respuesta').html(alertMessageError);
+            $('.callout').fadeIn();
+            $('.btn-primary').attr('disabled', false);
+            $('.callout').fadeOut(10000);
+        } 
+        else if (jqXHR.status == 500) {
+            var alertMessageError = '<div class="callout callout-danger" style="display: block">';
+            alertMessageError += '<h4><i class="icon fa fa-ban"></i> ¡Error!</h4>';
+            alertMessageError += '<p>Hubo un error al realizar búsqueda.</p>';
+            alertMessageError += '</div>';
+            $('div#respuesta').html(alertMessageError);
+            $('.callout').fadeIn();
+            $('.btn-primary').attr('disabled', false);
+            $('.callout').fadeOut(10000);
+        }
+        else if (textStatus === 'timeout') {
+            var alertMessageError = '<div class="callout callout-danger" style="display: block">';
+            alertMessageError += '<h4><i class="icon fa fa-ban"></i> ¡Error!</h4>';
+            alertMessageError += '<p>Tiempo de espera agotado para este procedimiento.</p>';
+            alertMessageError += '</div>';
+            $('div#respuesta').html(alertMessageError);
+            $('.callout').fadeIn();
+            $('.btn-primary').attr('disabled', false);
+            $('.callout').fadeOut(10000);
+        } 
+        else if (textStatus === 'abort') {
+            var alertMessageError = '<div class="callout callout-danger" style="display: block">';
+            alertMessageError += '<h4><i class="icon fa fa-ban"></i> ¡Error!</h4>';
+            alertMessageError += '<p>Usted ha abortado la operación.</p>';
+            alertMessageError += '</div>';
+            $('div#respuesta').html(alertMessageError);
+            $('.callout').fadeIn();
+            $('.btn-primary').attr('disabled', false);
+            $('.callout').fadeOut(10000);
+        } 
+        else {
+            var alertMessageError = '<div class="callout callout-danger" style="display: none">';
+            alertMessageError += '<h4><i class="icon fa fa-ban"></i> ¡Error!</h4>';
+            alertMessageError += '<p>Error desconocido: ' + jqXHR.responseText+'</p>';
+            alertMessageError += '</div>';
+            $('div#respuesta').html(alertMessageError);
+            $('.callout').fadeIn();
+            $('.btn-primary').attr('disabled', false);
+            $('.callout').fadeOut(10000);
+        }
+    });
+    return false;
+});

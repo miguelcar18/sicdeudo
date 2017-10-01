@@ -17,6 +17,7 @@ class CreateCitasTable extends Migration
             $table->increments('id');
             $table->date('fechaCita');
             $table->string('status');
+            $table->text('observaciones')->nullable();
             $table->integer('usuario')->unsigned();
             $table->foreign('usuario')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();

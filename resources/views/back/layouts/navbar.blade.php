@@ -128,11 +128,11 @@
                             <h5 class="text-overflow"><small>{!! Auth::user()->name !!}</small> </h5>
                         </div>
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{ URL::route('usuarios.show', Auth::user()->id) }}" class="dropdown-item notify-item">
                             <i class="zmdi zmdi-account-circle"></i> <span>Perfil</span>
                         </a>
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{ URL::route('logout') }}" class="dropdown-item notify-item">
                             <i class="zmdi zmdi-power"></i> <span>Salir</span>
                         </a>
                     </div>

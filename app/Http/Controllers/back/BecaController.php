@@ -261,4 +261,28 @@ class BecaController extends Controller
             return Redirect::route('dashboard');
         }
     }
+
+    public function listadoSolicitudesBecasAprobar() {
+        if(Auth::user()->rol == 4) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 5)->get();
+            $numero = 5;
+            return view("back.jefe.form.solicitudes", compact('solicitudes', 'numero'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function listadoRenovacionesBecasAprobar() {
+        if(Auth::user()->rol == 4) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 6)->get();
+            $numero = 6;
+            return view("back.jefe.form.solicitudes", compact('solicitudes', 'numero'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
 }

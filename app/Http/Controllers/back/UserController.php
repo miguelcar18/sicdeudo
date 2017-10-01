@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->rol == 5)
+        if(Auth::user()->rol == 4)
         {
             $users = User::All();
             return view('back.usuarios.index', compact('users'));    
@@ -68,7 +68,7 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        if(Auth::user()->rol == 5)
+        if(Auth::user()->rol == 4)
         {
             if($request->ajax())
             {
@@ -91,6 +91,7 @@ class UserController extends Controller
                 User::create([
                     'username'  => $request['username'], 
                     'name'      => $request['name'],
+                    'cedula'    => $request['cedula'],
                     'email'     => $request['email'], 
                     'password'  => bcrypt($request['password']), 
                     'rol'       => $request['rol'], 
@@ -119,13 +120,13 @@ class UserController extends Controller
     public function show($id)
     {
     	$this->user = User::find($id);
-        if(Auth::user()->rol == 5)
+        if(Auth::user()->rol == 4)
         {
-            return view('back.usuarios.profile', ['user' => $this->user]);
+            return view('back.usuarios.show', ['user' => $this->user]);
         }
         else if(Auth::user()->id == $id)
         {
-            return view('back.usuarios.profile', ['user' => $this->user]);
+            return view('back.usuarios.show', ['user' => $this->user]);
         }
         else
         {
@@ -143,7 +144,7 @@ class UserController extends Controller
     public function edit($id)
     {
     	$this->user = User::find($id);
-        if(Auth::user()->rol == 5 || Auth::user()->id == $id)
+        if(Auth::user()->rol == 4 || Auth::user()->id == $id)
         {
             return view('back.usuarios.edit', ['user' => $this->user]);    
         }
@@ -164,7 +165,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
     	$this->user = User::find($id);
-        if(Auth::user()->rol == 5 || Auth::user()->id == $id)
+        if(Auth::user()->rol == 4 || Auth::user()->id == $id)
         {
             if($request->ajax())
             {
@@ -190,6 +191,7 @@ class UserController extends Controller
                 $this->user->fill([
                     'username'  => $request['username'], 
                     'name'      => $request['name'],
+                    'cedula'    => $request['cedula'],
                     'email'     => $request['email'], 
                     'rol'       => $request['rol'], 
                     'details'   => $request['details'],
@@ -218,7 +220,7 @@ class UserController extends Controller
     public function destroy($id)
     {
     	$this->user = User::find($id);
-        if(Auth::user()->rol == 5)
+        if(Auth::user()->rol == 4)
         {
             if (is_null ($this->user))
             {
@@ -239,7 +241,7 @@ class UserController extends Controller
             else
             {
                 Session::flash('message', 'Usuario "' . $this->user->username . '" eliminado satisfactoriamente');
-                return Redirect::route('back.usuarios.index');
+                return Redirect::route('usuarios.index');
             }   
         }
         else

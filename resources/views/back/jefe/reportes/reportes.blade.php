@@ -13,17 +13,17 @@
 			<div class="row">
 				<div class="col-lg-8 col-md-8 col-md-offset-2">
 					<h4 class="header-title m-t-0 m-b-30" style="text-align: center">Criterios de búsqueda</h4>
-					<form class="form-inline">
+					{!! Form::open(array('route' => 'reportes.resultados', 'method' => 'post', 'class' => 'form-horizontal', 'id' => 'reporteForm')) !!}
 						<div class="form-group">
-							<label for="exampleInputName2">Criterio:</label>
-							{!! Form::select('anioIngresoUdo', array('' => 'Seleccione', '1' => 'Solicitud de ayudantía ordinaria', '2' => 'Renovación de ayudantía ordinaria', '3' => 'Solicitud de ayudantía técnica', '4' => 'Renovación de ayudantía técnica', '5' => 'Solicitud de beca de residencia', '6' => 'Renovación de beca de residenia', '7' => 'Solicitud de cambio de especialidad'), null, $attributes = array('id' => 'anioIngresoUdo', 'class' => 'form-control', 'required' => 'required')) !!}
+							<label for="petivion">Criterio:</label>
+							{!! Form::select('peticion', array('' => 'Seleccione', '1' => 'Solicitud de ayudantía ordinaria', '2' => 'Renovación de ayudantía ordinaria', '3' => 'Solicitud de ayudantía técnica', '4' => 'Renovación de ayudantía técnica', '5' => 'Solicitud de beca de residencia', '6' => 'Renovación de beca de residenia', '7' => 'Solicitud de cambio de especialidad'), null, $attributes = array('id' => 'peticion', 'class' => 'form-control', 'required' => 'required')) !!}
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail2">Periodo académico:</label>
+							<label for="periodoAcademico">Periodo académico:</label>
 							{!! Form::select('anioIngresoUdo', array('' => 'Seleccione', 'I-2017' => 'I-2017', 'III-2016' => 'III-2016', 'I-2016' => 'I-2016', 'III-2015' => 'III-2015', 'I-2015' => 'I-2015', 'III-2014' => 'III-2014', 'I-2014' => 'I-2014', 'III-2013' => 'III-2013', 'I-2013' => 'I-2013', 'III-2012' => 'III-2012', 'I-2012' => 'I-2012', 'III-2011' => 'III-2011', 'I-2011' => 'I-2011', 'III-2010' => 'III-2010', 'I-2010' => 'I-2010', 'III-2009' => 'III-2009', 'I-2009' => 'I-2009', 'III-2008' => 'III-2008', 'I-2008' => 'I-2008', 'III-2007' => 'III-2007', 'I-2007' => 'I-2007', 'III-2006' => 'III-2006', 'I-2006' => 'I-2006', 'III-2005' => 'III-2005', 'I-2005' => 'I-2005', 'III-2004' => 'III-2004', 'I-2004' => 'I-2004', 'III-2003' => 'III-2003', 'I-2003' => 'I-2003', 'III-2002' => 'III-2002', 'I-2002' => 'I-2002', 'III-2001' => 'III-2001', 'I-2001' => 'I-2001', 'III-2000' => 'III-2000', 'I-2000' => 'I-2000'), null, $attributes = array('id' => 'anioIngresoUdo', 'class' => 'form-control', 'required' => 'required')) !!}
 						</div>
 						<button type="submit" class="btn btn-primary"><i class="zmdi zmdi-search"></i> Buscar</button>
-					</form>
+					{!! form::close() !!}
 				</div>
 			</div><!-- end row -->
 		</div>

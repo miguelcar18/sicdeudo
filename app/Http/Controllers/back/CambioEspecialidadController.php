@@ -109,13 +109,46 @@ class CambioEspecialidadController extends Controller
         }
     }
 
-    public function listadoSolicitudesCambioEspecialidadAprobar() {
-        $solicitudes = PeticionesEstudiantes::where('peticion', 1)->get();
-        return view("back.jefe.cambioEspecialidad.solicitudesCambioEspecialidad", compact('solicitudes'));
+    public function listadoSolicitudesCambioAprobar() {
+        if(Auth::user()->rol == 4) {
+            $solicitudes = Citas::all();
+            return view("back.jefe.form.solicitudesCambioEspecialidad", compact('solicitudes'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
     }
 
-    public function formularioAprobarCambioESpecialidad($id) {
-        $estudiante = DatosPersonales::find($id);
-        return view("back.jefe.cambioEspecialidad.registrarCambioEspecialidad", compact('estudiante'));
+    public function formularioCambioStatusCE($id) {
+        if(Auth::user()->rol == 4) {
+            $peticion = Citas::find($id);
+            $estudiante = User::find($peticion->usuario);
+            return view("back.jefe.form.formularioCambioStatusCE", compact('peticion', 'estudiante'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function registrarCambioStatus(Request $request, $id) {
+        if($request->ajax()) {
+            if(Auth::user()->rol == 4) {
+                $this->peticion = Citas::find($id);
+                $campos = [
+                    'status'    => $request['status'], 
+                ];
+                $this->peticion->fill($campos);
+                $this->peticion->save();
+                return response()->json([
+                    'nuevoContenido' => $campos           
+                ]);
+            }
+            else {
+                Session::flash('message', 'Sin privilegios');
+                return Redirect::route('dashboard');
+            }
+        }
     }
 }

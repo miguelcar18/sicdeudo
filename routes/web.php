@@ -75,10 +75,22 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::post('/estudio-socio-economico', ['as' => 'registrarES', 'uses' => 'back\BackController@registrarEstudioSE']);
 
 	Route::get('/solicitudes-ayudantias-ordinarias-aprobar', ['as' => 'solicitudesAyudantiasOrdinariasAprobar', 'uses' => 'back\AyudantiaController@listadoSolicitudesOrdinariasAprobar']);
-	Route::get('/ayudantia-ordinaria-aprobar/{id}', ['as' => 'AprobarAO', 'uses' => 'back\AyudantiaController@formularioAprobarAO']);
+	Route::get('/renovaciones-ayudantias-ordinarias-aprobar', ['as' => 'renovacionesAyudantiasOrdinariasAprobar', 'uses' => 'back\AyudantiaController@listadoRenovacionesOrdinariasAprobar']);
+	Route::get('/solicitudes-ayudantias-tecnicas-aprobar', ['as' => 'solicitudesAyudantiasTecnicasAprobar', 'uses' => 'back\AyudantiaController@listadoSolicitudesTecnicasAprobar']);
+	Route::get('/renovaciones-ayudantias-tecnicas-aprobar', ['as' => 'renovacionesAyudantiasTecnicasAprobar', 'uses' => 'back\AyudantiaController@listadoRenovacionesTecnicasAprobar']);
+	Route::get('/solicitudes-becas-residencia-aprobar', ['as' => 'solicitudesBecasResidenciaAprobar', 'uses' => 'back\BecaController@listadoSolicitudesBecasAprobar']);
+	Route::get('/renovaciones-becas-residencia-aprobar', ['as' => 'renovacionesBecasResidenciaAprobar', 'uses' => 'back\BecaController@listadoRenovacionesBecasAprobar']);
+	Route::get('/solicitudes-cambio-especialidad-aprobar', ['as' => 'solicitudesCambioEspecialidadAprobar', 'uses' => 'back\CambioEspecialidadController@listadoSolicitudesCambioAprobar']);
 
-	Route::get('/solicitudes-cambio-especialidad-aprobar', ['as' => 'solicitudesCambioEspecialidadAprobar', 'uses' => 'back\CambioEspecialidadController@listadoSolicitudesCambioEspecialidadAprobar']);
-	Route::get('/cambio-especialidad-aprobar/{id}', ['as' => 'AprobarCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@formularioAprobarCambioEspecialidad']);
+	Route::get('/datos-generales-estudiante/{id}', ['as' => 'datosEstudiante', 'uses' => 'back\BackController@verDatosAprobar']);
+	Route::get('/datos-generales-cambio-especialidad/{id}', ['as' => 'datosEstudianteCE', 'uses' => 'back\CambioEspecialidadController@verDatosAprobarCE']);
+
+	Route::get('/cambio-status/{id}', ['as' => 'cambiarStatus', 'uses' => 'back\BackController@formularioCambioStatus']);
+	Route::get('/status-cambio-especialidad/{id}', ['as' => 'cambiarStatusCE', 'uses' => 'back\CambioEspecialidadController@formularioCambioStatusCE']);
+
+	Route::put('/registrar-cambio-status/{id}', ['as' => 'registrarCambioStatus', 'uses' => 'back\BackController@registrarCambioStatus']);
+	Route::put('/registrar-cambio-status-cambio-especialidad/{id}', ['as' => 'registrarCambioStatusCE', 'uses' => 'back\CambioEspecialidadController@registrarCambioStatus']);
+
 
 	Route::get('/reportes', ['as' => 'formularioReportes', 'uses' => 'back\BackController@formularioReportes']);
 	Route::get('/reporte-estadistico', ['as' => 'formularioReporteEstadistico', 'uses' => 'back\BackController@formularioReporteEstadistico']);

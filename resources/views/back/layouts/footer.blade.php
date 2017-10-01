@@ -6,9 +6,6 @@
             	Delegación de Desarrollo Estudiantil UDO Monagas.
             </div>
             <div class="col-xs-12">
-                Ing. Daihana Rivero.
-            </div>
-            <div class="col-xs-12">
                 2017 © Universidad de Oriente - Núcleo Monagas.
             </div>
         </div>

@@ -74,7 +74,9 @@
         //form with validation
         this.createValidatorForm($("#wizard-validation-form"));
         this.createValidatorForm($("#requisitosESForm"));
-
+        this.createValidatorForm($("#datosEstudiante"));
+        this.createValidatorForm($("#requisitosSolicitudAprobarForm"));
+        
         //vertical form
         this.createVertical($("#wizard-vertical"));
     },

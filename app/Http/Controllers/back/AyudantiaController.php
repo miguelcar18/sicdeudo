@@ -394,12 +394,50 @@ class AyudantiaController extends Controller
     }
 
     public function listadoSolicitudesOrdinariasAprobar() {
-        $solicitudes = PeticionesEstudiantes::where('peticion', 1)->get();
-        return view("back.jefe.solicitudesAyudantiasOrdinarias", compact('solicitudes'));
+        if(Auth::user()->rol == 4) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 1)->get();
+            $numero = 1;
+            return view("back.jefe.form.solicitudes", compact('solicitudes', 'numero'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
     }
 
-    public function formularioAprobarAO($id) {
-        $estudiante = DatosPersonales::find($id);
-        return view("back.jefe.registrarAyudantiasOrdinarias", compact('estudiante'));
+    public function listadoRenovacionesOrdinariasAprobar() {
+        if(Auth::user()->rol == 4) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 2)->get();
+            $numero = 2;
+            return view("back.jefe.form.solicitudes", compact('solicitudes', 'numero'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function listadoSolicitudesTecnicasAprobar() {
+        if(Auth::user()->rol == 4) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 3)->get();
+            $numero = 3;
+            return view("back.jefe.form.solicitudes", compact('solicitudes', 'numero'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function listadoRenovacionesTecnicasAprobar() {
+        if(Auth::user()->rol == 4) {
+            $solicitudes = PeticionesEstudiantes::where('peticion', 4)->get();
+            $numero = 4;
+            return view("back.jefe.form.solicitudes", compact('solicitudes', 'numero'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
     }
 }

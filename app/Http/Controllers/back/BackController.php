@@ -26,15 +26,6 @@ class BackController extends Controller
     	return view ('back.layouts.base');
     }
 
-    public function formularioReportes()
-    {
-    	return view ('back.jefe.reportes');
-    }
-    public function formularioReporteEstadistico()
-    {
-        return view ('back.jefe.reportes');
-    }
-
     public function formularioEstudioSE($id, $peticion) {
         if(Auth::user()->rol == 3) {
             $estudiante = DatosPersonales::find($id);
@@ -168,5 +159,69 @@ class BackController extends Controller
             Session::flash('message', 'Sin privilegios');
             return Redirect::route('dashboard');
         }
+    }
+
+    public function verDatosAprobar($id) {
+        if(Auth::user()->rol == 4) {
+            $peticion = PeticionesEstudiantes::find($id);
+            $estudiante = DatosPersonales::find($peticion->estudiante);
+            $datosSocioEconomicos = DatosSocioeconomicos::where('peticion', $id)->where('estudiante', $peticion->estudiante)->first();
+            $economiaFamiliar = EconomiaFamiliar::where('peticion', $id)->where('estudiante', $peticion->estudiante)->first();
+            $grupoFamiliar = GrupoFamiliar::where('peticion', $id)->where('estudiante', $peticion->estudiante)->get();
+            $psicodinamica = Psicodinamica::where('peticion', $id)->where('estudiante', $peticion->estudiante)->first();
+            return view("back.jefe.form.verDatosAprobar", compact('peticion', 'estudiante', 'datosSocioEconomicos', 'economiaFamiliar', 'grupoFamiliar','psicodinamica'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function formularioCambioStatus($id) {
+        if(Auth::user()->rol == 4) {
+            $peticion = PeticionesEstudiantes::find($id);
+            $estudiante = DatosPersonales::find($peticion->estudiante);
+            return view("back.jefe.form.formularioCambioStatus", compact('peticion', 'estudiante'));
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function registrarCambioStatus(Request $request, $id) {
+        if($request->ajax()) {
+            if(Auth::user()->rol == 4) {
+                $this->peticion = PeticionesEstudiantes::find($id);
+                $campos = [
+                    'status'    => $request['status'], 
+                ];
+                $this->peticion->fill($campos);
+                $this->peticion->save();
+                return response()->json([
+                    'nuevoContenido' => $campos           
+                ]);
+            }
+            else {
+                Session::flash('message', 'Sin privilegios');
+                return Redirect::route('dashboard');
+            }
+        }
+    }
+
+    public function formularioReportes()
+    {
+        if(Auth::user()->rol == 4) {
+            return view ('back.jefe.reportes.reportes');
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function formularioReporteEstadistico()
+    {
+        return view ('back.jefe.reportes');
     }
 }

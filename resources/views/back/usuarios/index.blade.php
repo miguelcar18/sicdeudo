@@ -31,11 +31,11 @@
                             <td>
                             	@if($user->rol == 1)
                             		Estudiante
+                            	@elseif($user->rol == 2)
+                            		Secretaria
                             	@elseif($user->rol == 3)
-                            		Estudiante
-                            	@elseif($user->rol == 4)
                             		Trabajador social
-                            	@elseif($user->rol == 5)
+                            	@elseif($user->rol == 4)
                             		Jefe
                             	@endif
                         	</td>
@@ -54,6 +54,8 @@
 						@endforeach
 				</tbody>
 			</table>
+			{!! Form::open(array('route' => array('usuarios.destroy', 'USER_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-delete')) !!}
+            {!! Form::close() !!}
 		</div>
 	</div>
 </div> <!-- end row -->
@@ -78,6 +80,45 @@
 				},
 			}
 		});
+
+		@if(Session::has('message'))
+			setTimeout(function () {
+				var mensaje1 = "{{ Session::get('message') }}";
+				swal("¡Eliminado!", mensaje1, "success");
+			}, 10);
+		@endif
+
+        if ($('.tooltip-error').length) {
+           $('.tooltip-error').click(function (e) {
+                e.preventDefault();
+                var message = "¿Está realmente seguro(a) de eliminar este usuario? Todas las operaciones que haya realizado con esta cuenta también serán eliminadas";
+                var id = $(this).data('id');
+                var form = $('#form-delete');
+                var action = form.attr('action').replace('USER_ID', id);
+                var row =  $(this).parents('tr');
+                swal({
+                    title: message,
+                    //text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonClass: 'btn-secondary waves-effect',
+                    confirmButtonClass: 'btn-warning',
+                    confirmButtonText: "Si",
+                    cancelButtonText: "No",
+                    closeOnConfirm: false
+                }, function () {
+                    row.fadeOut(1000);
+                    $.post(action, form.serialize(), function(result) {
+                        if (result.success) {
+                            row.delay(1000).remove();
+                            swal("¡Eliminado!", result.msg, "success");                
+                        } 
+                        else 
+                            row.show();
+                    }, 'json');
+                });
+            });
+        }
 	});
 </script>
 @stop
