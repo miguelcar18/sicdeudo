@@ -93,10 +93,10 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 
 
 	Route::get('/reportes', ['as' => 'formularioReportes', 'uses' => 'back\BackController@formularioReportes']);
-	Route::get('/reporte-cita', ['as' => 'formularioReporteCita', 'uses' => 'back\BackController@formularioReporteCita']);
+	Route::get('/reporte-citas', ['as' => 'formularioReporteCita', 'uses' => 'back\BackController@formularioReporteCita']);
 
 	Route::get('/reportes/{criterio?}/{periodo?}', ['as' => 'direccionConsulta', 'uses' => 'back\BackController@resultadosReportes']);
-	Route::get('/reporte-cita/{periodo?}', ['as' => 'direccionConsultaCita', 'uses' => 'back\BackController@resultadosReporteCita']);
+	Route::get('/reporte-cita-direccion/{periodo?}', ['as' => 'direccionConsultaCita', 'uses' => 'back\BackController@resultadosReporteCita']);
 
 	Route::get('reporte-pdf/{criterio?}/{periodo?}', ['as' => 'direccionReporte', 'uses' =>'back\BackController@reportePdf']);
 	Route::get('reporte-cita-pdf/{periodo?}', ['as' => 'direccionReporteCita', 'uses' =>'back\BackController@reporteCitaPdf']);
