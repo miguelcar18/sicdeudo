@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function __construct(){
         //middleware para autorizar acciones
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['register', 'store']]);
         //$this->beforeFilter('@find', ['only' => ['show', 'edit', 'update', 'destroy']]);
     }
 
@@ -68,7 +68,43 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        if(Auth::user()->rol == 4)
+        if(!Auth::check())
+        {
+            if($request->ajax())
+            {
+                if(!empty($request->file('file')))
+                {
+                    //obtenemos el campo file definido en el formulario
+                    $file = $request->file('file');
+
+                    //obtenemos el nombre del archivo
+                    $nombre = str_replace(':', '_', Carbon::now()->toDateTimeString().$file->getClientOriginalName());
+
+                    //indicamos que queremos guardar un nuevo archivo en el disco local
+                    \Storage::disk('users')->put($nombre,  \File::get($file));
+                }
+                else
+                {
+                    $nombre = '';
+                }
+                //User::create($request->all());
+                User::create([
+                    'username'  => $request['username'], 
+                    'name'      => $request['name'],
+                    'cedula'    => $request['cedula'],
+                    'email'     => $request['email'], 
+                    'password'  => bcrypt($request['password']), 
+                    'rol'       => 1, 
+                    'details'   => $request['details'],
+                    'path'      => $nombre
+                ]);
+                
+                return response()->json([
+                    'nuevoContenido' => $request->all()
+                ]);
+            }    
+        }
+        else if(Auth::user()->rol == 4)
         {
             if($request->ajax())
             {
@@ -249,5 +285,10 @@ class UserController extends Controller
             Session::flash('message', 'Sin privilegios');
             return Redirect::route('dashboard');
         }
+    }
+
+    public function register()
+    {
+        return view('back.usuarios.otherNew');
     }
 }

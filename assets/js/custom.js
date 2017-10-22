@@ -336,7 +336,14 @@ $("form#solicitudAOForm, form#solicitudATForm").validate({
                 $("button#cancelar").addClass('disabled');
             },
             success:function(respuesta){
-                swal("¡Registrado!", alertMessage, "success");
+                var url = '/sicdeudo/dashboard/reporte/'+respuesta.idPeticion;
+                swal({
+                    title: '¡Registrado!',
+                    text: alertMessage,
+                    type: 'success',
+                }, function () {
+                    window.open(url, '_blank');
+                });
                 if($("button.btn-primary").attr('data') == 1)
                 {
                     $('form.ayudantiaForm').reset();
@@ -562,7 +569,14 @@ $("form#renovacionAOForm, form#renovacionATForm").validate({
                 $("button#cancelar").addClass('disabled');
             },
             success:function(respuesta){
-                swal("¡Registrado!", alertMessage, "success");
+                var url = '/sicdeudo/dashboard/reporte/'+respuesta.idPeticion;
+                swal({
+                    title: '¡Registrado!',
+                    text: alertMessage,
+                    type: 'success',
+                }, function () {
+                    window.open(url, '_blank');
+                });
                 if($("button.btn-primary").attr('data') == 1)
                 {
                     $('form.ayudantiaForm').reset();
@@ -781,7 +795,14 @@ $("form#solicitudBRForm").validate({
                 $("button#cancelar").addClass('disabled');
             },
             success:function(respuesta){
-                swal("¡Registrado!", alertMessage, "success");
+                var url = '/sicdeudo/dashboard/reporte/'+respuesta.idPeticion;
+                swal({
+                    title: '¡Registrado!',
+                    text: alertMessage,
+                    type: 'success',
+                }, function () {
+                    window.open(url, '_blank');
+                })
                 if($("button#solicitudBRSubmit").attr('data') == 1)
                 {
                     $('form#solicitudBRForm').reset();
@@ -948,7 +969,14 @@ $("form#renovacionBRForm").validate({
                 $("button#cancelar").addClass('disabled');
             },
             success:function(respuesta){
-                swal("¡Registrado!", alertMessage, "success");
+                var url = '/sicdeudo/dashboard/reporte/'+respuesta.idPeticion;
+                swal({
+                    title: '¡Registrado!',
+                    text: alertMessage,
+                    type: 'success',
+                }, function () {
+                    window.open(url, '_blank');
+                });
                 if($("button#renovacionBRSubmit").attr('data') == 1)
                 {
                     $('form#renovacionBRForm').reset();
@@ -1008,10 +1036,21 @@ $("form#solicitudCEForm").validate({
             },
             success:function(respuesta){
                 if(respuesta.existente == true){
-                    swal("¡Error!", 'Usted ya posee una cita registrada para el día "'+respuesta.fecha+'"', "error");
+                    swal({
+                        title: '¡Error!',
+                        text: 'Usted ya posee una cita registrada para el día "'+respuesta.fecha+'"',
+                        type: 'error',
+                    });
                 }
                 else{
-                    swal("¡Registrado!", alertMessage, "success");
+                    var url = '/sicdeudo/dashboard/reporte-cita/'+respuesta.idPeticion;
+                    swal({
+                        title: '¡Registrado!',
+                        text: alertMessage,
+                        type: 'success',
+                    }, function () {
+                        window.open(url, '_blank');
+                    });
                     if($("button#solicitudCESubmit").attr('data') == 1)
                     {
                         $('form#solicitudCEForm').reset();
@@ -1830,4 +1869,180 @@ $("#reporteForm").on('submit', function(e){
         }
     });
     return false;
+});
+
+var tablaData = $('#datatableConsulta').DataTable({
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ resultados por página",
+        "zeroRecords": "Sin resultados",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "Sin ninguna información",
+        "infoFiltered": "(Filtrado de _MAX_ resultados totales)",
+        "search":         "Buscar:",
+        "paginate": {
+            "first":      "Primero",
+            "last":       "Último",
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+        },
+    }
+});
+
+$("button#criterioConsultar").on('click', function(e){
+    var valorPeticion = $("select#peticion").val() != "" ? $("select#peticion").val() : "0";
+    var valorAnioIngresoUdo = $("select#anioIngresoUdo").val() != "" ? $("select#anioIngresoUdo").val() : "0";
+    var url = $("#direccionConsulta").val();
+    var contenido = "";
+    $("#reporteConsulta").attr("data-criterio", valorPeticion);
+    $("#reporteConsulta").attr("data-periodo", valorAnioIngresoUdo);
+
+    $.ajax({
+        url: url+"/"+valorPeticion+"/"+valorAnioIngresoUdo,
+        type: "GET",
+        success: function(respuesta){
+            var contadorAprobados = 0;
+            var contadorRechazados = 0;
+            var contadorPendientes = 0;
+            tablaData.clear().draw();
+            respuesta.respuesta.forEach(function(element) {
+                if(element.semestreActual == 'primero') { var semestre = '1er Semestre'; }
+                else if(element.semestreActual == 'segundo') { var semestre = '2do Semestre'; }
+                else if(element.semestreActual == 'tercero') { var semestre = '3ro Semestre'; }
+                else if(element.semestreActual == 'cuarto') { var semestre = '4to Semestre'; }
+                else if(element.semestreActual == 'quinto') { var semestre = '5to Semestre'; }
+                else if(element.semestreActual == 'sexto') { var semestre = '6to Semestre'; }
+                else if(element.semestreActual == 'septimo') { var semestre = '7mo Semestre'; }
+                else if(element.semestreActual == 'octavo') { var semestre = '8vo Semestre'; }
+                else if(element.semestreActual == 'noveno') { var semestre = '9no Semestre'; }
+                else if(element.semestreActual == 'decimo') { var semestre = '10mo Semestre'; }
+
+                if(element.especialidad == 'administracion' ) { var carrera = 'Administración de Empresas'; }
+                else if(element.especialidad == 'contaduria' ) { var carrera = 'Contaduría Pública'; }
+                else if(element.especialidad == 'gerencia' ) { var carrera = 'Gerencia de Recursos Humanos'; }
+                else if(element.especialidad == 'agronomia' ) { var carrera = 'Ingeniería Agronómica'; }
+                else if(element.especialidad == 'petroleo' ) { var carrera = 'Ingeniería de Petróleo'; }
+                else if(element.especialidad == 'sistemas' ) { var carrera = 'Ingeniería de Sistemas'; }
+                else if(element.especialidad == 'produccionAnimal' ) { var carrera = 'Ingeniería en Producción Animal'; }
+                else if(element.especialidad == 'tecnologiaAlimentos' ) { var carrera = 'Tecnología de los Alimentos'; }
+
+                if(element.status == "Aprobado") { contadorAprobados++; }
+                else if(element.status == "Rechazado") { contadorRechazados++; }
+                else { contadorPendientes++; }
+
+                tablaData.row.add([
+                    element.cedula, 
+                    element.apellidosNombres, 
+                    semestre, 
+                    carrera, 
+                    element.status
+                ]).draw();
+            });
+            $("#morris-donut-example").empty();
+            !function($) {
+                "use strict";
+                var Dashboard = function() {};
+
+                Dashboard.prototype.createDonutChart = function(element, data, colors) {
+                    Morris.Donut({
+                        element: element,
+                        data: data,
+                        resize: true,
+                        colors: colors
+                    });
+                },
+
+                Dashboard.prototype.init = function() {
+                    var $donutData = [
+                    {label: "Aprobados", value: contadorAprobados},
+                    {label: "Rechazados", value: contadorRechazados},
+                    {label: "Pendientes", value: contadorPendientes}
+                    ];
+                    this.createDonutChart('morris-donut-example', $donutData, ['#1bb99a','#ff0000', '#3db9dc']);
+                },
+                $.Dashboard = new Dashboard, $.Dashboard.Constructor = Dashboard
+            }(window.jQuery),
+
+            function($) {
+                "use strict";
+                $.Dashboard.init();
+            }(window.jQuery);
+        }
+    });
+});
+
+$("button#criterioConsultarCita").on('click', function(e){
+    var valorAnioIngresoUdo = $("select#anioIngresoUdo").val() != "" ? $("select#anioIngresoUdo").val() : "0";
+    var url = $("#direccionConsultaCita").val();
+    var contenido = "";
+    $("#reporteConsultaCita").attr("data-periodo", valorAnioIngresoUdo);
+    $.ajax({
+        url: url+"/"+valorAnioIngresoUdo,
+        type: "GET",
+        success: function(respuesta){
+            var contadorAprobados = 0;
+            var contadorRechazados = 0;
+            var contadorPendientes = 0;
+            tablaData.clear().draw();
+            respuesta.respuesta.forEach(function(element) {
+                if(element.status == "Aprobado") { contadorAprobados++; }
+                else if(element.status == "Rechazado") { contadorRechazados++; }
+                else { contadorPendientes++; }
+
+                tablaData.row.add([
+                    element.cedula, 
+                    element.name, 
+                    element.status
+                ]).draw();
+            });
+            $("#morris-donut-example").empty();
+            !function($) {
+                "use strict";
+                var Dashboard = function() {};
+
+                Dashboard.prototype.createDonutChart = function(element, data, colors) {
+                    Morris.Donut({
+                        element: element,
+                        data: data,
+                        resize: true,
+                        colors: colors
+                    });
+                },
+
+                Dashboard.prototype.init = function() {
+                    var $donutData = [
+                    {label: "Aprobados", value: contadorAprobados},
+                    {label: "Rechazados", value: contadorRechazados},
+                    {label: "Pendientes", value: contadorPendientes}
+                    ];
+                    this.createDonutChart('morris-donut-example', $donutData, ['#1bb99a','#ff0000', '#3db9dc']);
+                },
+                $.Dashboard = new Dashboard, $.Dashboard.Constructor = Dashboard
+            }(window.jQuery),
+
+            function($) {
+                "use strict";
+                $.Dashboard.init();
+            }(window.jQuery);
+        }
+    });
+});
+
+$("#reporteConsulta").on('click', function(){
+    if($(this).data("criterio") == "-" && $(this).data("periodo") == "-"){
+        alert("Debe realizar una consulta primero");
+    }
+    else {
+        var url = $(this).data("href")+"/"+$(this).data("criterio")+"/"+$(this).data("periodo");
+        window.open(url, '');
+    }
+});
+
+$("#reporteConsultaCita").on('click', function(){
+    if($(this).data("periodo") == "-"){
+        alert("Debe realizar una consulta primero");
+    }
+    else {
+        var url = $(this).data("href")+"/"+$(this).data("periodo");
+        window.open(url, '');
+    }
 });

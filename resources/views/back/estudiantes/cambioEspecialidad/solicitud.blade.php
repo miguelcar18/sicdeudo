@@ -37,7 +37,9 @@
 		autoclose: true,
 		todayHighlight: true,
 		daysOfWeekDisabled: [0,6],
-		datesDisabled: array
+		datesDisabled: array,
+		startDate: new Date('2017', '10', '01'), //set it here
+    	endDate: new Date('2017', '10', '30')
 	});
 </script>
 

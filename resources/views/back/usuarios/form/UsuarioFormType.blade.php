@@ -20,10 +20,12 @@
 		</div>
 	</div>
 	<div class="form-group row">
+		@if(Auth::check())
 		<label for="rol" class="col-sm-2 form-control-label">Rol <span class="text-danger">*</span></label>
 		<div class="col-sm-4">
 			{!! Form::select('rol', array('' => 'Seleccione', '1' => 'Estudiante', '2' => 'Secretaria', '3' => 'Trabajador social', '4' => 'Jefe'), null, $attributes = array('id' => 'rol', 'class' => 'form-control', 'required' => 'required')) !!}
 		</div>
+		@endif
 		<label for="username" class="col-sm-2 form-control-label">Nombre de usuario <span class="text-danger">*</span></label>
 		<div class="col-sm-4">
 			{!! Form::text('username', null, ['placeholder' => 'Nombre de usuario', 'class' => 'form-control', 'id' => 'username', 'required' => true]) !!}

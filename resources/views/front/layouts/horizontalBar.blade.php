@@ -13,7 +13,7 @@
                     <a href="{{ URL::route('contactos') }}"><i class="zmdi zmdi-account-box-mail"></i><span> Contactos </span> </a>
                 </li>
                 <li>
-                    <a href="{{ URL::route('login.index') }}"><i class="zmdi zmdi-key"></i><span> Iniciar sesión </span> </a>
+                    <a href="{{ URL::route('login') }}"><i class="zmdi zmdi-key"></i><span> Iniciar sesión </span> </a>
                 </li>
                 @foreach($redes as $red)
                 <li style="float: right">

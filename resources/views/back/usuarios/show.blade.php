@@ -15,7 +15,7 @@
 					<th>Imagen: </th>
 					<td>
 						@if($user->path == '')
-                        <img src="{{ asset('assets/avatars/user.jpg') }}" alt="user" class="img-thumbails" width="100px" height="auto">
+                        <img src="{{ asset('uploads/usuarios/unfile.png') }}" alt="user" class="img-thumbails" width="100px" height="auto">
                         @else
                         <img src="{{ asset('uploads/usuarios/'.$user->path) }}" alt="Foto de {{ $user->username }}" class="img-thumbails" width="100px" height="auto">
                         @endif

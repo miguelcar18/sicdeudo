@@ -8,6 +8,8 @@ use App\EconomiaFamiliar;
 use App\GrupoFamiliar;
 use App\Psicodinamica;
 use App\PeticionesEstudiantes;
+use App\Citas;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -18,7 +20,7 @@ use Session;
 class BackController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['reporte']]);
     }
     
     public function index()
@@ -220,8 +222,124 @@ class BackController extends Controller
         }
     }
 
-    public function formularioReporteEstadistico()
+    public function formularioReporteCita()
     {
-        return view ('back.jefe.reportes');
+        if(Auth::user()->rol == 4) {
+            return view ('back.jefe.reportes.reporteCita');
+        }
+        else {
+            Session::flash('message', 'Sin privilegios');
+            return Redirect::route('dashboard');
+        }
+    }
+
+    public function resultadosReportes($criterio, $periodo)
+    {
+        if($criterio == "0" && $periodo == "0"){
+            $resultados = \DB::select("SELECT * FROM peticiones_estudiantes INNER JOIN datos_personales ON peticiones_estudiantes.estudiante = datos_personales.id INNER JOIN datos_academicos ON datos_academicos.estudiante = datos_personales.id");
+        }
+        elseif($criterio == "0" && $periodo != "0"){
+            $resultados = \DB::select("SELECT * FROM peticiones_estudiantes INNER JOIN datos_personales ON peticiones_estudiantes.estudiante = datos_personales.id INNER JOIN datos_academicos ON datos_academicos.estudiante = datos_personales.id WHERE datos_academicos.anioIngresoUdo = '".$periodo."'");
+        }
+        elseif($periodo == "0" && $criterio != "0"){
+            $resultados = \DB::select("SELECT * FROM peticiones_estudiantes INNER JOIN datos_personales ON peticiones_estudiantes.estudiante = datos_personales.id INNER JOIN datos_academicos ON datos_academicos.estudiante = datos_personales.id WHERE peticiones_estudiantes.peticion = ".$criterio."");
+        }
+        else{
+            $resultados = \DB::select("SELECT * FROM peticiones_estudiantes INNER JOIN datos_personales ON peticiones_estudiantes.estudiante = datos_personales.id INNER JOIN datos_academicos ON datos_academicos.estudiante = datos_personales.id WHERE peticiones_estudiantes.peticion = ".$criterio." and datos_academicos.anioIngresoUdo = '".$periodo."'");
+        }
+
+        return response()->json([
+            'respuesta' => $resultados
+        ]);
+    }
+
+    public function reportePdf($criterio, $periodo)
+    {
+        if($criterio == "0" && $periodo == "0"){
+            $resultados = \DB::select("SELECT * FROM peticiones_estudiantes INNER JOIN datos_personales ON peticiones_estudiantes.estudiante = datos_personales.id INNER JOIN datos_academicos ON datos_academicos.estudiante = datos_personales.id");
+        }
+        elseif($criterio == "0" && $periodo != "0"){
+            $resultados = \DB::select("SELECT * FROM peticiones_estudiantes INNER JOIN datos_personales ON peticiones_estudiantes.estudiante = datos_personales.id INNER JOIN datos_academicos ON datos_academicos.estudiante = datos_personales.id WHERE datos_academicos.anioIngresoUdo = '".$periodo."'");
+        }
+        elseif($periodo == "0" && $criterio != "0"){
+            $resultados = \DB::select("SELECT * FROM peticiones_estudiantes INNER JOIN datos_personales ON peticiones_estudiantes.estudiante = datos_personales.id INNER JOIN datos_academicos ON datos_academicos.estudiante = datos_personales.id WHERE peticiones_estudiantes.peticion = ".$criterio."");
+        }
+        else{
+            $resultados = \DB::select("SELECT * FROM peticiones_estudiantes INNER JOIN datos_personales ON peticiones_estudiantes.estudiante = datos_personales.id INNER JOIN datos_academicos ON datos_academicos.estudiante = datos_personales.id WHERE peticiones_estudiantes.peticion = ".$criterio." and datos_academicos.anioIngresoUdo = '".$periodo."'");
+        }
+
+        $pdf = \PDF::loadView('back.jefe.reportes.reporteConsulta', compact('resultados'));
+        return $pdf->stream('reporteConsulta.pdf');
+    }
+
+    public function resultadosReporteCita($periodo)
+    {
+        if($periodo == "0"){
+            $resultados = \DB::select("SELECT * FROM citas INNER JOIN usuarios ON citas.usuario = usuarios.id");
+        }
+        else{
+            $arr = explode("-", $periodo);
+            $pa = $arr[0];
+            $anioinicio = $arr[1];
+            $aniofin = $arr[0] == 1 ? $arr[1] : $arr[1] + 1;
+
+            if($pa == 1){
+                $fechaInicio = $anioinicio."-04-01";
+                $fechaFin = $aniofin."-07-31";
+            }
+            else if($pa != 1){
+                $fechaInicio = $anioinicio."-10-01";
+                $fechaFin = $aniofin."-03-31";
+            }
+            $resultados = \DB::select("SELECT * FROM citas INNER JOIN usuarios ON citas.usuario = usuarios.id WHERE fechaCita BETWEEN '".$fechaInicio."' AND '".$fechaFin."'");
+        }
+
+        return response()->json([
+            'respuesta' => $resultados
+        ]);
+    }
+
+    public function reporteCitaPdf($periodo)
+    {
+        if($periodo == "0"){
+            $resultados = \DB::select("SELECT * FROM citas INNER JOIN usuarios ON citas.usuario = usuarios.id");
+        }
+        else{
+            $arr = explode("-", $periodo);
+            $pa = $arr[0];
+            $anioinicio = $arr[1];
+            $aniofin = $arr[0] == 1 ? $arr[1] : $arr[1] + 1;
+
+            if($pa == 1){
+                $fechaInicio = $anioinicio."-04-01";
+                $fechaFin = $aniofin."-07-31";
+            }
+            else if($pa != 1){
+                $fechaInicio = $anioinicio."-10-01";
+                $fechaFin = $aniofin."-03-31";
+            }
+            $resultados = \DB::select("SELECT * FROM citas INNER JOIN usuarios ON citas.usuario = usuarios.id WHERE fechaCita BETWEEN '".$fechaInicio."' AND '".$fechaFin."'");
+        }
+
+        $pdf = \PDF::loadView('back.jefe.reportes.reporteConsultaCita', compact('resultados'));
+        return $pdf->stream('reporteConsultaCita.pdf');
+    }
+
+    public function reporte($id){
+        setlocale(LC_ALL, "es_VE.UTF-8");
+        $fechaHoy = date('d/m/Y');
+        $peticion = PeticionesEstudiantes::find($id);
+        $estudiante = DatosPersonales::find($peticion->estudiante);
+        $pdf = \PDF::loadView('back.estudiantes.reportes.comprobante', compact('peticion', 'estudiante', 'fechaHoy'));
+        return $pdf->stream('comprobante.pdf');
+    }
+
+    public function reporteCita($id){
+        setlocale(LC_ALL, "es_VE.UTF-8");
+        $fechaHoy = date('d/m/Y');
+        $peticion = Citas::find($id);
+        $estudiante = User::find($peticion->usuario);
+        $pdf = \PDF::loadView('back.estudiantes.reportes.comprobanteCita', compact('peticion', 'estudiante', 'fechaHoy'));
+        return $pdf->stream('comprobante.pdf');
     }
 }

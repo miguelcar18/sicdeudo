@@ -42,7 +42,7 @@
                         <div class="col-xs-12 text-xs-center">
                             <h6 class="text-muted text-uppercase m-b-0 m-t-0">Iniciar Sesión</h6>
                         </div>
-                        {!! Form::open(['route' => 'login.store', 'method' => 'post', 'id' => 'loginForm', 'name' => 'loginForm', 'class' => 'form-horizontal m-t-20 form-validate', 'novalidate' => 'novalidate']) !!}
+                        {!! Form::open(['route' => 'login', 'method' => 'post', 'id' => 'loginForm', 'name' => 'loginForm', 'class' => 'form-horizontal m-t-20 form-validate', 'novalidate' => 'novalidate']) !!}
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     {!! Form::text('username', null, ['placeholder' => 'Nombre de usuario', 'class' => 'form-control', 'id' => 'username', 'required' => true]) !!}
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group m-t-30 m-b-0">
                                 <div class="col-sm-12">
-                                    <a href="{{ URL::route('restaurarContrasena') }}" class="text-muted"><i class="fa fa-lock m-r-5"></i>¿Olvidó su contraseña?</a>
+                                    <a href="{{ URL::route('password.request') }}" class="text-muted"><i class="fa fa-lock m-r-5"></i>¿Olvidó su contraseña?</a>
                                 </div>
                             </div>
                         {!! Form::close()!!}
@@ -70,7 +70,7 @@
             <!-- end card-box-->
             <div class="m-t-20">
                 <div class="text-xs-center">
-                    <p class="text-dark">¿No tienes una cuenta? <a href="#" class="text-dark m-l-5"><b>Registrate</b></a></p>
+                    <p class="text-dark">¿No tienes una cuenta? <a href="{{ URL::route('registerCustom') }}" class="text-dark m-l-5"><b>Registrate</b></a></p>
                 </div>
             </div>
         </div>

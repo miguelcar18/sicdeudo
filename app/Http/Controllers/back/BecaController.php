@@ -21,6 +21,11 @@ use Response;
 
 class BecaController extends Controller
 {
+    public function __construct(){
+        //middleware para autorizar acciones
+        $this->middleware('auth');
+    }
+
     public function solicitud() {
         if(Auth::user()->rol == 1) {
             return view("back.estudiantes.becas.solicitud");
@@ -91,8 +96,10 @@ class BecaController extends Controller
                 DatosAcademicos::create($camposAcademicos);
                 DatosInteresBecas::create($camposInteres);
                 PeticionesEstudiantes::create($camposPeticiones);
+                $idPeticion = \DB::getPdo()->lastInsertId();
                 return response()->json([
-                    'nuevoContenido' => $request->all()
+                    'nuevoContenido' => $request->all(),
+                    'idPeticion' => $idPeticion
                 ]);
             }
         }
@@ -149,8 +156,10 @@ class BecaController extends Controller
                 DatosAcademicos::create($camposAcademicos);
                 DatosInteresBecas::create($camposInteres);
                 PeticionesEstudiantes::create($camposPeticiones);
+                $idPeticion = \DB::getPdo()->lastInsertId();
                 return response()->json([
-                    'nuevoContenido' => $request->all()
+                    'nuevoContenido' => $request->all(),
+                    'idPeticion' => $idPeticion
                 ]);
             }
         }

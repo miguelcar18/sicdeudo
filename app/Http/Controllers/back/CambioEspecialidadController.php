@@ -21,6 +21,11 @@ use Response;
 
 class CambioEspecialidadController extends Controller
 {
+    public function __construct(){
+        //middleware para autorizar acciones
+        $this->middleware('auth');
+    }
+    
     public function formularioCita() {
         if(Auth::user()->rol == 1) {
             $fechas = Citas::select('fechaCita', \DB::raw('COUNT(fechaCita) as total'))
@@ -37,7 +42,7 @@ class CambioEspecialidadController extends Controller
     public function registrarCita(Request $request) {
         if(Auth::user()->rol == 1) {
             if($request->ajax()) {
-                $consulta = Citas::where('fechaCita', '>=', Carbon::now()->toDateString())->where('usuario', $request['usuario'])->firstOrFail();
+                $consulta = Citas::where('fechaCita', '>=', Carbon::now()->toDateString())->where('usuario', $request['usuario'])->first();
                 if(count($consulta) == 0)
                 {
                     $separarFecha = explode('/', $request['fechaCita']);
@@ -48,9 +53,11 @@ class CambioEspecialidadController extends Controller
                         'status'    => 'Pendiente'
                     ];
                     Citas::create($campos);
+                    $idPeticion = \DB::getPdo()->lastInsertId();
                     return response()->json([
                         'nuevoContenido' => $request->all(),
-                        'existente' => false
+                        'existente' => false,
+                        'idPeticion' => $idPeticion
                     ]);
                 }
                 else{

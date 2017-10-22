@@ -21,6 +21,11 @@ use Response;
 
 class AyudantiaController extends Controller
 {
+    public function __construct(){
+        //middleware para autorizar acciones
+        $this->middleware('auth');
+    }
+    
     public function solicitudOrdinaria() {
         if(Auth::user()->rol == 1) {
             return view("back.estudiantes.ayudantias.ordinarias.solicitud");
@@ -91,8 +96,10 @@ class AyudantiaController extends Controller
                 DatosAcademicos::create($camposAcademicos);
                 DatosInteresAyudantias::create($camposInteres);
                 PeticionesEstudiantes::create($camposPeticiones);
+                $idPeticion = \DB::getPdo()->lastInsertId();
                 return response()->json([
-                    'nuevoContenido' => $request->all()
+                    'nuevoContenido' => $request->all(),
+                    'idPeticion' => $idPeticion
                 ]);
             }
         }
@@ -173,13 +180,15 @@ class AyudantiaController extends Controller
                 ];
                 DatosAcademicos::create($camposAcademicos);
                 PeticionesEstudiantes::create($camposPeticiones);
+                $idPeticion = \DB::getPdo()->lastInsertId();
                 Supervisor::create($camposSupervisor);
                 $idSupervisor = \DB::getPdo()->lastInsertId();
                 $this->estudiante = DatosPersonales::find($idEstudiante);
                 $this->estudiante->supervisor = $idSupervisor;
                 $this->estudiante->save();
                 return response()->json([
-                    'nuevoContenido' => $request->all()
+                    'nuevoContenido' => $request->all(),
+                    'idPeticion' => $idPeticion
                 ]);
             }
         }

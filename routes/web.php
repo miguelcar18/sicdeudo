@@ -36,7 +36,7 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::post('/renovacion-becas-residencia', ['as' => 'registrarRenovacionBR', 'uses' => 'back\BecaController@registrarRenovacion']);
 
 	Route::get('/cita-cambio-especialidad', ['as' => 'citaCambioEspecialidad', 'uses' => 'back\CambioEspecialidadController@formularioCita']);
-	Route::post('/cita-cambio-especialidad', ['as' => 'registrarCita', 'uses' => 'back\CambioEspecialidadController@registrarCita']);
+	Route::post('cita-cambio-especialidad', ['as' => 'registrarCita', 'uses' => 'back\CambioEspecialidadController@registrarCita']);
 
 	Route::get('/solicitudes-ayudantias-ordinarias', ['as' => 'solicitudesAyudantiasOrdinarias', 'uses' => 'back\AyudantiaController@listadoSolicitudesOrdinarias']);
 	Route::get('/renovaciones-ayudantias-ordinarias', ['as' => 'renovacionesAyudantiasOrdinarias', 'uses' => 'back\AyudantiaController@listadoRenovacionesOrdinarias']);
@@ -93,17 +93,23 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 
 
 	Route::get('/reportes', ['as' => 'formularioReportes', 'uses' => 'back\BackController@formularioReportes']);
-	Route::get('/reporte-estadistico', ['as' => 'formularioReporteEstadistico', 'uses' => 'back\BackController@formularioReporteEstadistico']);
+	Route::get('/reporte-cita', ['as' => 'formularioReporteCita', 'uses' => 'back\BackController@formularioReporteCita']);
+
+	Route::get('/reportes/{criterio?}/{periodo?}', ['as' => 'direccionConsulta', 'uses' => 'back\BackController@resultadosReportes']);
+	Route::get('/reporte-cita/{periodo?}', ['as' => 'direccionConsultaCita', 'uses' => 'back\BackController@resultadosReporteCita']);
+
+	Route::get('reporte-pdf/{criterio?}/{periodo?}', ['as' => 'direccionReporte', 'uses' =>'back\BackController@reportePdf']);
+	Route::get('reporte-cita-pdf/{periodo?}', ['as' => 'direccionReporteCita', 'uses' =>'back\BackController@reporteCitaPdf']);
 
 	Route::resource('usuarios', 'back\UserController');
+	Route::get('register', ['as' => 'registerCustom', 'uses' => 'back\UserController@register']);
 	Route::resource('redes-sociales', 'back\RedesSocialesController');
 	Route::resource('enlaces-interes', 'back\EnlacesInteresController');
+
+	Route::get('/reporte/{id}', ['as' => 'reporte', 'uses' =>'back\BackController@reporte']);
+	Route::get('/reporte-cita/{id}', ['as' => 'reporteCita', 'uses' =>'back\BackController@reporteCita']);
 });
 
-Route::resource('login', 'back\LoginController');
+//Route::resource('login', 'back\LoginController');
 Route::get('logout', ['as' => 'logout', 'uses' => 'back\LoginController@logout']);
-Route::get('restaurar-contrasena', ['as' => 'restaurarContrasena', 'uses' =>'back\LoginController@changePassword']);
-Route::post('postChangePassword', ['as' => 'postChangePassword', 'uses' =>'back\LoginController@postChangePassword']);
-Route::get('/selectUsuario/{id}', ['as' => 'selectusuario', 'uses' => 'back\LoginController@preguntaUsuarioSeleccionado']);
-Route::get('/nueva-contrasena/{id}', ['as' => 'nuevaContrasena', 'uses' =>'back\LoginController@nuevoPassword']);
-Route::post('postNewPassword', ['as' => 'postNewPassword', 'uses' =>'back\LoginController@postNewPassword']);
+Auth::routes();

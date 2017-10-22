@@ -83,7 +83,7 @@
                     <a href="#"><i class="zmdi zmdi-collection-text"></i><span> Reportes </span> </a>
                     <ul class="submenu">
                         <li><a href="{{ URL::route('formularioReportes') }}">Generales</a></li>
-                        <li><a href="#">Cambio de especialidad</a></li>
+                        <li><a href="{{ URL::route('formularioReporteCita') }}">Cambio de especialidad</a></li>
                     </ul>
                 </li>
                 <li>

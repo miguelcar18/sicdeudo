@@ -117,7 +117,7 @@
                 <li class="nav-item dropdown notification-list">
                     <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         @if(Auth::user()->path == '')
-                        <img src="{{ asset('assets/avatars/user.jpg') }}" alt="user" class="img-circle">
+                        <img src="{{ asset('uploads/usuarios/unfile.png') }}" alt="user" class="img-circle">
                         @else
                         <img src="{{ asset('uploads/usuarios/'.Auth::user()->path) }}" alt="Foto de {{ Auth::user()->username }}" class="img-circle">
                         @endif
